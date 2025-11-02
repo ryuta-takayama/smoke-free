@@ -6,8 +6,8 @@
 | email | string | null: false, unique: true, index: true |
 | encrypted_password | string | null: false |
 | nickname | string | null: false |
-| age | integer | null: true |
-| reason_to_quit | text | null: true |
+| age | integer | null: false |
+| reason_to_quit | integer | null: false |
 
 **Associations**  
 - has_one :smoking_setting, dependent: :destroy  
@@ -237,7 +237,7 @@ erDiagram
     author string
     lang string
   }
-  
+
 ```
 
 
