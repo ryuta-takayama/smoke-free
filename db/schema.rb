@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_02_123308) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_02_125050) do
+  create_table "abstinence_sessions", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "started_at", null: false
+    t.datetime "ended_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_abstinence_sessions_on_user_id"
+  end
+
   create_table "smoking_settings", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "daily_cigarette_count", null: false
@@ -37,5 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_02_123308) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "abstinence_sessions", "users"
   add_foreign_key "smoking_settings", "users"
 end

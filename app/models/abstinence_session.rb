@@ -1,0 +1,2 @@
+class AbstinenceSession < ApplicationRecord
+end
