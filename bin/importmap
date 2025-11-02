@@ -2,4 +2,3 @@
 
 require_relative "../config/application"
 require "importmap/commands"
-pin "registration_steps_controller", to: "registration_steps_controller.js"
