@@ -1,0 +1,79 @@
+<% content_for :page_title, "smoke free | トップページ" %>
+
+<% content_for :head do %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+<% end %>
+
+
+<div class="page-wrapper">
+  <header class="site-header">
+    <div class="logo">smoke free</div>
+    <nav class="site-nav">
+      <a href="#guide">禁煙ガイド</a>
+      <a class="login" href="#login">ログイン</a>
+      <a class="cta" href="#signup">無料登録</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="guide">
+      <div class="hero-badge">あなたの禁煙人生をサポート</div>
+      <h1 class="hero-title">smoke free</h1>
+      <p class="hero-lead">
+        煙からあなたを解放する。<br>
+        smoke freeは科学的根拠に基づき、あなたの禁煙を成功に導くサポートプログラムです。
+      </p>
+    </section>
+
+    <section class="features" aria-label="サポート機能">
+      <h2 class="section-title">あなたの禁煙をサポートする機能</h2>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="icon icon-coach" aria-hidden="true"></div>
+          <h3>リアルタイムコーチング</h3>
+          <p>
+            専門コーチが24時間体制でサポート。禁煙中の不安や悩みにすぐ対応します。
+          </p>
+        </article>
+        <article class="feature-card">
+          <div class="icon icon-plan" aria-hidden="true"></div>
+          <h3>アクションプラン作成</h3>
+          <p>
+            あなたの生活習慣に合わせた禁煙計画を自動作成。無理なく続けられるプランを提案。
+          </p>
+        </article>
+        <article class="feature-card">
+          <div class="icon icon-track" aria-hidden="true"></div>
+          <h3>成果の見える化</h3>
+          <p>
+            禁煙の進捗や健康状態を可視化。達成度が一目でわかり、モチベーションが続きます。
+          </p>
+        </article>
+        <article class="feature-card">
+          <div class="icon icon-community" aria-hidden="true"></div>
+          <h3>コミュニティ交流</h3>
+          <p>
+            同じ目標を持つ仲間とつながり、情報交換や励まし合いができる安心のコミュニティ。
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-section" id="signup">
+      <h2>今日から新しい人生を始めませんか？</h2>
+      <p>
+        smoke freeと一緒に、禁煙で豊かな毎日への一歩を踏み出しましょう。
+      </p>
+      <a class="cta-button" href="#start">無料で始める</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; <%= Time.current.year %> smoke free</span>
+  </footer>
+</div>
