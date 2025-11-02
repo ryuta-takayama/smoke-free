@@ -41,14 +41,6 @@ body {
   box-shadow: 0 18px 40px rgba(26, 133, 122, 0.15);
 }
 
-.logo-icon {
-  background-image: url("/images/heart-svgrepo-com.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 40px;
-  height: 40px;
-}
 .logo-name {
   font-size: 1.5rem;
   font-weight: 700;
