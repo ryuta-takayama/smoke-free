@@ -28,6 +28,7 @@
 | daily_cigarettes | integer | null: false |
 | pack_price_jpy | integer | null: false |
 | cigs_per_pack | integer | null: false |
+| quit_start_datetime | datetime | null: false|
 
 **Associations**  
 - belongs_to :user  
@@ -183,6 +184,7 @@ erDiagram
     daily_cigarettes integer
     pack_price_jpy integer
     cigs_per_pack integer
+    quit_start_datetime datetime
   }
 
   ABSTINENCE_SESSIONS {
@@ -235,7 +237,7 @@ erDiagram
     author string
     lang string
   }
-
+  
 ```
 
 

@@ -1,0 +1,2 @@
+class SmokingSetting < ApplicationRecord
+end
