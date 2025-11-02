@@ -1,0 +1,2 @@
+class RestartChallenge < ApplicationRecord
+end

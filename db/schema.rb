@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_02_125050) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_02_132628) do
   create_table "abstinence_sessions", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "started_at", null: false
@@ -18,6 +18,76 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_02_125050) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_abstinence_sessions_on_user_id"
+  end
+
+  create_table "action_plans", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_action_plans_on_post_id"
+    t.index ["user_id"], name: "index_action_plans_on_user_id"
+  end
+
+  create_table "comments", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_comments_on_post_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "goals", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "target_item", null: false
+    t.integer "target_amount_jpy", null: false
+    t.datetime "started_on", null: false
+    t.datetime "achieved_on", null: false
+    t.integer "status", default: 0, null: false, comment: "active=0,achieved=1"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_goals_on_user_id"
+  end
+
+  create_table "likes", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_likes_on_post_id"
+    t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "posts", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "body", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "quotes", charset: "utf8mb3", force: :cascade do |t|
+    t.text "text", null: false
+    t.string "author", null: false
+    t.string "source", default: "ja"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "restart_challenges", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "started_at", null: false
+    t.datetime "expire_at", null: false
+    t.integer "status", default: 0, null: false, comment: "pending=0,success=1,failed=2"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "started_at"], name: "index_restart_challenges_on_user_id_and_started_at"
+    t.index ["user_id"], name: "index_restart_challenges_on_user_id"
   end
 
   create_table "smoking_settings", charset: "utf8mb3", force: :cascade do |t|
@@ -47,5 +117,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_02_125050) do
   end
 
   add_foreign_key "abstinence_sessions", "users"
+  add_foreign_key "action_plans", "posts"
+  add_foreign_key "action_plans", "users"
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
+  add_foreign_key "goals", "users"
+  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "users"
+  add_foreign_key "posts", "users"
+  add_foreign_key "restart_challenges", "users"
   add_foreign_key "smoking_settings", "users"
 end
