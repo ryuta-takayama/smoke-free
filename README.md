@@ -170,15 +170,6 @@ erDiagram
   POSTS ||--o{ LIKES : "has_many"
   POSTS ||--|| ACTION_PLANS : "has_one"
 
-  LIKES }o--o{ USERS : "many_to_many"
-  LIKES }o--o{ POSTS : "many_to_many"
-
-  QUOTES {
-    text text
-    author string
-    lang string
-  }
-
   USERS {
     email string
     encrypted_password string
@@ -188,17 +179,20 @@ erDiagram
   }
 
   SMOKING_SETTINGS {
+    user_id references
     daily_cigarettes integer
     pack_price_jpy integer
     cigs_per_pack integer
   }
 
   ABSTINENCE_SESSIONS {
+    user_id references
     started_at datetime
     ended_at datetime
   }
 
   GOALS {
+    user_id references
     target_item string
     target_amount_jpy integer
     started_on date
@@ -207,6 +201,7 @@ erDiagram
   }
 
   RESTART_CHALLENGES {
+    user_id references
     started_at datetime
     expires_at datetime
     status integer
@@ -214,19 +209,33 @@ erDiagram
   }
 
   POSTS {
+    user_id references
     body text
   }
 
   ACTION_PLANS {
+    post_id references
+    user_id references
     body text
   }
 
   COMMENTS {
+    post_id references
+    user_id references
     body text
   }
 
   LIKES {
+    post_id references
+    user_id references
   }
+
+  QUOTES {
+    text text
+    author string
+    lang string
+  }
+
 ```
 
 
