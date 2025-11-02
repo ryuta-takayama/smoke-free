@@ -155,6 +155,78 @@
 - **Quotes** — 固定テーブル（外部キー関係なし）  
 
 
+```mermaid
+erDiagram
 
+  USERS ||--|| SMOKING_SETTINGS : "has_one"
+  USERS ||--o{ ABSTINENCE_SESSIONS : "has_many"
+  USERS ||--o{ GOALS : "has_many (active:1)"
+  USERS ||--o{ RESTART_CHALLENGES : "has_many"
+  USERS ||--o{ POSTS : "has_many"
+  USERS ||--o{ COMMENTS : "has_many"
+  USERS ||--o{ LIKES : "has_many"
+
+  POSTS ||--o{ COMMENTS : "has_many"
+  POSTS ||--o{ LIKES : "has_many"
+  POSTS ||--|| ACTION_PLANS : "has_one"
+
+  LIKES }o--o{ USERS : "many_to_many"
+  LIKES }o--o{ POSTS : "many_to_many"
+
+  QUOTES {
+    text text
+    author string
+    lang string
+  }
+
+  USERS {
+    email string
+    encrypted_password string
+    nickname string
+    age integer
+    reason_to_quit text
+  }
+
+  SMOKING_SETTINGS {
+    daily_cigarettes integer
+    pack_price_jpy integer
+    cigs_per_pack integer
+  }
+
+  ABSTINENCE_SESSIONS {
+    started_at datetime
+    ended_at datetime
+  }
+
+  GOALS {
+    target_item string
+    target_amount_jpy integer
+    started_on date
+    status integer
+    achieved_at datetime
+  }
+
+  RESTART_CHALLENGES {
+    started_at datetime
+    expires_at datetime
+    status integer
+    completed_at datetime
+  }
+
+  POSTS {
+    body text
+  }
+
+  ACTION_PLANS {
+    body text
+  }
+
+  COMMENTS {
+    body text
+  }
+
+  LIKES {
+  }
+```
 
 
