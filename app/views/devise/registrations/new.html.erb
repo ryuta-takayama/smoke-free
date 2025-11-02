@@ -102,7 +102,7 @@
         </div>
 
         <div class="form-field">
-          <label class="form-label" for="user_age">年齢（任意）</label>
+          <label class="form-label" for="user_age">年齢</label>
           <%= f.number_field :age, class: 'form-control', placeholder: '例: 30', min: 0 %>
         </div>
 
@@ -126,7 +126,7 @@
 
     <div class="auth-footer">
       <span>すでにアカウントをお持ちですか？</span>
-      <%= link_to 'ログイン', new_session_path(resource_name), class: 'link' %>
+      <%= link_to 'ログイン', new_session_path, class: 'link' %>
     </div>
   </div>
 </div>
