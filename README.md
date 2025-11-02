@@ -88,9 +88,6 @@
 | author | string | null: true |
 | lang | string | null: false, default: "ja" |
 
-**Associations**  
-- （なし：固定リスト）
-
 ---
 
 ## posts
