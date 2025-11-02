@@ -46,7 +46,14 @@ body {
   font-weight: 700;
   color: var(--primary);
   letter-spacing: 0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1; /* keep text vertically centered */
 }
+
+/* Explicit logo image */
+.logo-icon { width: 28px; height: 28px; display: block; position: relative; top: 2px; }
 
 .site-nav {
   display: flex;
@@ -171,28 +178,13 @@ main {
   border-radius: 20px;
   background: linear-gradient(135deg, rgba(59, 178, 167, 0.15), rgba(76, 126, 245, 0.15));
   position: relative;
+  display: grid;
+  place-items: center; /* center icon image */
+  line-height: 0; /* avoid baseline offset */
 }
 
-.icon-plan{
-  background-image: url("/images/action-redo-svgrepo-com.svg");
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.icon-track{
-  background-image: url("/images/achivement-svgrepo-com.svg");
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.icon-community{
-  background-image: url("/images/community-svgrepo-com.svg");
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+/* Image inside icon container */
+.icon-img { width: 34px; height: 34px; object-fit: contain; position: relative; z-index: 1; display: block; }
 
 .icon::after {
   content: "";
@@ -201,6 +193,7 @@ main {
   border-radius: 12px;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   opacity: 0.8;
+  z-index: 0; /* keep below the icon image */
 }
 
 .cta-section {

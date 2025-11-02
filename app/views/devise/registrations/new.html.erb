@@ -1,29 +1,132 @@
-<h2>Sign up</h2>
+<div class="auth-wrapper">
+  <div class="auth-card" data-controller="registration-steps">
+    <div class="auth-header">
+      <h1 class="auth-title">新規登録</h1>
+      <p class="auth-subtitle">smoke freeで新しい人生を始めましょう</p>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="stepper" aria-label="登録ステップ">
+        <div class="stepper-track">
+          <div class="step-indicator" data-registration-steps-target="indicator" data-step="1">1</div>
+          <div class="step-divider"></div>
+          <div class="step-indicator" data-registration-steps-target="indicator" data-step="2">2</div>
+          <div class="step-divider"></div>
+          <div class="step-indicator" data-registration-steps-target="indicator" data-step="3">3</div>
+        </div>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'auth-form', 'data-registration-steps-target': 'form' }) do |f| %>
+      <%= render 'devise/shared/error_messages', resource: resource %>
+
+      <section class="form-step" data-registration-steps-target="step" data-step="1" aria-labelledby="step1-title">
+        <h2 id="step1-title" class="step-title"><span class="step-title-icon">👤</span> アカウント情報</h2>
+        <p class="step-hint">基本的なアカウント情報を入力してください</p>
+
+        <div class="form-field">
+          <label class="form-label" for="user_nickname">ニックネーム</label>
+          <%= f.text_field :nickname, class: 'form-control', placeholder: 'お好きな名前を入力してください', required: true %>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="user_email">メールアドレス</label>
+          <%= f.email_field :email, class: 'form-control', placeholder: 'example@email.com', autocomplete: 'email', required: true %>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="user_password">パスワード
+            <% if @minimum_password_length %>
+              <span class="hint">(最低 <%= @minimum_password_length %> 文字)</span>
+            <% end %>
+          </label>
+          <div class="password-field">
+            <%= f.password_field :password, class: 'form-control', placeholder: 'パスワードを入力してください', autocomplete: 'new-password', 'data-registration-steps-target': 'passwordField' %>
+            <button class="visibility-btn" type="button" aria-label="パスワードを表示" data-action="registration-steps#togglePassword"><%= image_tag 'eye-svgrepo-com.svg', alt: '', class: 'visibility-icon' %></button>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="user_password_confirmation">パスワード確認</label>
+          <div class="password-field">
+            <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'もう一度パスワードを入力してください', autocomplete: 'new-password', 'data-registration-steps-target': 'passwordConfirmationField' %>
+            <button class="visibility-btn" type="button" aria-label="パスワードを表示" data-action="registration-steps#togglePasswordConfirmation"><%= image_tag 'eye-svgrepo-com.svg', alt: '', class: 'visibility-icon' %></button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary" data-action="registration-steps#next">次へ</button>
+        </div>
+      </section>
+
+      <section class="form-step" data-registration-steps-target="step" data-step="2" aria-labelledby="step2-title" hidden>
+        <h2 id="step2-title" class="step-title"><span class="step-title-icon">📅</span> 禁煙情報</h2>
+        <p class="step-hint">あなたの喫煙状況について教えてください</p>
+
+        <div class="form-field">
+          <label class="form-label" for="smoking_quit_start">禁煙開始日</label>
+          <input id="smoking_quit_start" name="smoking_setting[quit_start_date]" type="date" class="form-control" placeholder="年/月/日">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="smoking_daily">1日の喫煙本数</label>
+          <input id="smoking_daily" name="smoking_setting[daily_cigarette_count]" type="number" min="0" class="form-control" placeholder="例: 20">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="smoking_price">タバコ1箱の価格（円）</label>
+          <input id="smoking_price" name="smoking_setting[cigarette_price_jpy]" type="number" min="0" class="form-control" placeholder="例: 580">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="smoking_years">喫煙歴（年）</label>
+          <input id="smoking_years" name="smoking_setting[years_smoking]" type="number" min="0" class="form-control" placeholder="例: 10">
+        </div>
+
+        <div class="form-actions between">
+          <button type="button" class="btn btn-secondary" data-action="registration-steps#back">戻る</button>
+          <button type="button" class="btn btn-primary" data-action="registration-steps#next">次へ</button>
+        </div>
+      </section>
+
+      <section class="form-step" data-registration-steps-target="step" data-step="3" aria-labelledby="step3-title" hidden>
+        <h2 id="step3-title" class="step-title"><span class="step-title-icon">🎯</span> 目標設定</h2>
+        <p class="step-hint">モチベーション維持のための情報です（任意）</p>
+
+        <div class="form-field">
+          <label class="form-label" for="goal_item">目標商品・やりたいこと（任意）</label>
+          <input id="goal_item" name="goal[target_item]" type="text" class="form-control" placeholder="例: MacBook、旅行、投資など">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="goal_amount">目標金額（円）（任意）</label>
+          <input id="goal_amount" name="goal[target_amount_jpy]" type="number" min="0" class="form-control" placeholder="例: 200000">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="user_age">年齢（任意）</label>
+          <%= f.number_field :age, class: 'form-control', placeholder: '例: 30', min: 0 %>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="user_reason_to_quit">禁煙理由（任意）</label>
+          <%= f.select :reason_to_quit, [
+              ['健康のため', 'health'],
+              ['お金のため', 'money'],
+              ['家族のため', 'family'],
+              ['仕事・学業', 'work'],
+              ['その他', 'other']
+            ], { include_blank: '選択してください' }, class: 'form-control' %>
+        </div>
+
+        <div class="form-actions between">
+          <button type="button" class="btn btn-secondary" data-action="registration-steps#back">戻る</button>
+          <%= f.submit '登録する', class: 'btn btn-submit', data: { action: 'registration-steps#finalize' } %>
+        </div>
+      </section>
+    <% end %>
+
+    <div class="auth-footer">
+      <span>すでにアカウントをお持ちですか？</span>
+      <%= link_to 'ログイン', new_session_path(resource_name), class: 'link' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
