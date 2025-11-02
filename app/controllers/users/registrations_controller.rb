@@ -51,7 +51,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     )
   rescue ActiveRecord::RecordInvalid => e
     # 失敗してもユーザー登録は成功させ、エラーメッセージだけ足す
-    user.errors.add(:base, "禁煙情報の保存に失敗しました: #{e.record.errors.full_messages.to_sentence}")
+    user.errors.add(:base, "禁煙情報の保存に失敗しましたが、ユーザー登録は成功しました！マイページで禁煙情報を設定してください: #{e.record.errors.full_messages.to_sentence}")
   end
 end
 
