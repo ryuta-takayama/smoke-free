@@ -41,11 +41,19 @@ body {
   box-shadow: 0 18px 40px rgba(26, 133, 122, 0.15);
 }
 
-.logo {
+.logo-icon {
+  background-image: url("/images/heart-svgrepo-com.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 40px;
+  height: 40px;
+}
+.logo-name {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 .site-nav {
@@ -137,7 +145,7 @@ main {
 
 .feature-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
 
@@ -171,6 +179,27 @@ main {
   border-radius: 20px;
   background: linear-gradient(135deg, rgba(59, 178, 167, 0.15), rgba(76, 126, 245, 0.15));
   position: relative;
+}
+
+.icon-plan{
+  background-image: url("/images/action-redo-svgrepo-com.svg");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-track{
+  background-image: url("/images/achivement-svgrepo-com.svg");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon-community{
+  background-image: url("/images/community-svgrepo-com.svg");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .icon::after {
