@@ -8,7 +8,7 @@ development:
   username: root
   password:
   host: localhost
-  database: smoke-free_development
+  database: smoke_free_development
 
 test:
   <<: *default
@@ -16,7 +16,7 @@ test:
   username: root
   password:
   host: localhost
-  database: smoke-free_test
+  database: smoke_free_test
 
 production:
   <<: *default
