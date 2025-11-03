@@ -13,7 +13,21 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :age, :reason_to_quit])
+    devise_parameter_sanitizer.permit(
+      :sign_up,
+      keys: [
+        :nickname,
+        :age,
+        :reason_to_quit,
+        { smoking_setting_attributes: [
+            :quit_start_date, # virtual attribute (converted to quit_start_datetime)
+            :daily_cigarette_count,
+            :cigarette_price_jpy,
+            :cigarette_per_pack
+          ]
+        }
+      ]
+    )
   end
 
 end

@@ -24,7 +24,7 @@
 
         <div class="form-field">
           <label class="form-label" for="user_nickname">ニックネーム</label>
-          <%= f.text_field :nickname, class: 'form-control', placeholder: 'お好きな名前を入力してください', required: true %>
+          <%= f.text_field :nickname, class: 'form-control', placeholder: '呼ばれたい名前を入力してください', required: true %>
         </div>
 
         <div class="form-field">
@@ -58,23 +58,25 @@
       </section>
 
       <section class="form-step" data-registration-steps-target="step" data-step="2" aria-labelledby="step2-title" hidden>
-        <h2 id="step2-title" class="step-title"><span class="step-title-icon">📅</span> 禁煙情報</h2>
-        <p class="step-hint">あなたの喫煙状況について教えてください</p>
+        <h2 id="step2-title" class="step-title"><span class="step-title-icon">🚭</span> 喫煙設定</h2>
+        <p class="step-hint">あなたの喫煙習慣について教えてください</p>
 
-        <div class="form-field">
-          <label class="form-label" for="smoking_quit_start">禁煙開始日</label>
-          <input id="smoking_quit_start" name="smoking_setting[quit_start_date]" type="date" class="form-control" placeholder="年/月/日">
-        </div>
+        <%= f.fields_for :smoking_setting do |s| %>
+          <div class="form-field">
+            <%= s.label :quit_start_date, "禁煙開始日", class: "form-label" %>
+            <%= s.date_field :quit_start_date, class: "form-control", placeholder: "年/月/日" %>
+          </div>
 
-        <div class="form-field">
-          <label class="form-label" for="smoking_daily">1日の喫煙本数</label>
-          <input id="smoking_daily" name="smoking_setting[daily_cigarette_count]" type="number" min="0" class="form-control" placeholder="例: 20">
-        </div>
+          <div class="form-field">
+            <%= s.label :daily_cigarette_count, "1日の喫煙本数", class: "form-label" %>
+            <%= s.number_field :daily_cigarette_count, min: 0, class: "form-control", placeholder: "例: 20" %>
+          </div>
 
-        <div class="form-field">
-          <label class="form-label" for="smoking_price">タバコ1箱の価格（円）</label>
-          <input id="smoking_price" name="smoking_setting[cigarette_price_jpy]" type="number" min="0" class="form-control" placeholder="例: 580">
-        </div>
+          <div class="form-field">
+            <%= s.label :cigarette_price_jpy, "タバコ1箱の価格（円）", class: "form-label" %>
+            <%= s.number_field :cigarette_price_jpy, min: 0, class: "form-control", placeholder: "例: 580" %>
+          </div>
+        <% end %>
 
         <div class="form-field">
           <label class="form-label" for="smoking_years">喫煙歴（年）</label>
@@ -89,11 +91,11 @@
 
       <section class="form-step" data-registration-steps-target="step" data-step="3" aria-labelledby="step3-title" hidden>
         <h2 id="step3-title" class="step-title"><span class="step-title-icon">🎯</span> 目標設定</h2>
-        <p class="step-hint">モチベーション維持のための情報です（任意）</p>
+        <p class="step-hint">モチベーションを維持するための目標です（任意）</p>
 
         <div class="form-field">
-          <label class="form-label" for="goal_item">目標商品・やりたいこと（任意）</label>
-          <input id="goal_item" name="goal[target_item]" type="text" class="form-control" placeholder="例: MacBook、旅行、投資など">
+          <label class="form-label" for="goal_item">目標品（何を買いたいか（任意））</label>
+          <input id="goal_item" name="goal[target_item]" type="text" class="form-control" placeholder="例: MacBook, 旅行, 家族のために">
         </div>
 
         <div class="form-field">
@@ -107,12 +109,12 @@
         </div>
 
         <div class="form-field">
-          <label class="form-label" for="user_reason_to_quit">禁煙理由（任意）</label>
+          <label class="form-label" for="user_reason_to_quit">禁煙の理由（任意）</label>
           <%= f.select :reason_to_quit, [
               ['健康のため', 'health'],
-              ['お金のため', 'money'],
+              ['節約のため', 'money'],
               ['家族のため', 'family'],
-              ['仕事・学業', 'work'],
+              ['仕事・勉強', 'work'],
               ['その他', 'other']
             ], { include_blank: '選択してください' }, class: 'form-control' %>
         </div>
@@ -126,7 +128,8 @@
 
     <div class="auth-footer">
       <span>すでにアカウントをお持ちですか？</span>
-      <%= link_to 'ログイン', new_session_path, class: 'link' %>
+      <%= link_to 'ログイン', new_user_session_path, class: 'link' %>
     </div>
   </div>
 </div>
+
