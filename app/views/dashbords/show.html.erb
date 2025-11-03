@@ -1,4 +1,15 @@
 <div class="db-wrapper" data-controller="dashboard">
+  <!-- Topbar header -->
+  <header class="db-topbar">
+    <div class="brand-left">
+      <div class="brand-logo"><%= image_tag 'heart-svgrepo-com.svg', alt: '', class: 'brand-icon' %></div>
+      <div class="brand-name">smoke free</div>
+    </div>
+    <div class="actions-right">
+      <a href="#" class="action-link">👤 マイアカウント</a>
+      <a href="#" class="action-link">⚙</a>
+    </div>
+  </header>
   <!-- Greeting / streak -->
   <section class="db-hero">
     <div class="db-hero-main">
@@ -211,5 +222,29 @@
       </section>
     </div>
   </section>
-</div>
 
+  <!-- Footer quick links -->
+  <footer class="db-footer-links">
+    <a href="#" class="footer-card">
+      <span class="f-icon">📊</span>
+      <div class="f-main">
+        <div class="f-title">タイムライン</div>
+        <div class="f-sub">詳細な記録を見る</div>
+      </div>
+    </a>
+    <a href="#" class="footer-card">
+      <span class="f-icon">🎯</span>
+      <div class="f-main">
+        <div class="f-title">目標設定</div>
+        <div class="f-sub">モチベーション管理</div>
+      </div>
+    </a>
+    <a href="#" class="footer-card">
+      <span class="f-icon">⚙</span>
+      <div class="f-main">
+        <div class="f-title">設定</div>
+        <div class="f-sub">アカウント管理</div>
+      </div>
+    </a>
+  </footer>
+</div>
