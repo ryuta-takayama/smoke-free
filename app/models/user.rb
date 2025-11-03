@@ -17,6 +17,9 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :smoking_setting
   enum reason_to_quit: { health: 0, money: 1, family: 2, work: 3, other: 4 }
 
+  after_create :create_abstinence_start_data
+
+
 
   before_validation :normalize_fields
 
@@ -54,6 +57,14 @@ class User < ApplicationRecord
 
   def password_required?
   !persisted? || password.present? || password_confirmation.present?
+  end
+
+  def create_abstinence_start_data
+  return unless smoking_setting.present?
+
+  abstinence_sessions.create!(
+    started_at: smoking_setting.quit_start_datetime
+  )
   end
 
 end
