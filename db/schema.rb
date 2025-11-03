@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_02_132628) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_03_114947) do
   create_table "abstinence_sessions", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "started_at", null: false

@@ -45,9 +45,7 @@ export default class extends Controller {
     }
   }
 
-  finalize() {
-    // no-op: submit is handled by the form; keep for clarity
-  }
+  // finalize() removed: submit is handled natively by the form
 
   togglePassword() {
     this._toggleField(this.passwordFieldTarget)
@@ -78,4 +76,3 @@ export default class extends Controller {
     field.setAttribute('type', type)
   }
 }
-

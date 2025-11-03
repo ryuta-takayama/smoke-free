@@ -1,26 +1,58 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<header>
+  <div class="auth-header-background">
+    <div class="logo-back-link">
+      <%= link_to root_path, class: 'auth-logo-link', aria: { label: 'トップへ戻る' } do %>
+        <%= image_tag 'back-svgrepo-com.svg', alt: '', class: 'auth-logo' %>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="back-link">
+      <%= link_to '戻る', root_path, class: 'link' %>
+    </div>
   </div>
-<% end %>
+</header>
 
-<%= render "devise/shared/links" %>
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="brand-mark"><%= image_tag 'heart-svgrepo-com.svg', alt: '', class: 'brand-icon' %></div>
+      <h1 class="auth-title">ログイン</h1>
+      <p class="auth-subtitle">おかえりなさい<br>smoke freeの続きを始めましょう</p>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: user_session_path, html: { class: 'auth-form', data: { turbo: false } }) do |f| %>
+      <%= render 'devise/shared/error_messages', resource: resource %>
+
+      <div class="form-field">
+        <label class="form-label" for="user_email">メールアドレス</label>
+        <%= f.email_field :email, class: 'form-control', placeholder: 'example@email.com', autocomplete: 'email', autofocus: true, required: true %>
+      </div>
+
+      <div class="form-field">
+        <label class="form-label" for="user_password">パスワード</label>
+        <div class="password-field" data-controller="password-visibility">
+          <%= f.password_field :password, class: 'form-control', placeholder: 'パスワードを入力してください', autocomplete: 'current-password', required: true, data: { password_visibility_target: 'input' } %>
+          <button class="visibility-btn" type="button" aria-label="パスワードを表示" data-action="password-visibility#toggle"><%= image_tag 'eye-svgrepo-com.svg', alt: '', class: 'visibility-icon' %></button>
+        </div>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-field form-row-between">
+          <label class="remember-label">
+            <%= f.check_box :remember_me %> ログインしたままにする
+          </label>
+          <%= link_to 'パスワードを忘れた方', "#", class: 'link' %>
+        </div>
+      <% end %>
+
+      <div class="form-actions">
+        <%= f.submit 'ログイン', class: 'btn btn-submit' %>
+      </div>
+    <% end %>
+
+    <div class="auth-footer">
+      <span>アカウントをお持ちでない方は</span>
+      <%= link_to '新規登録', new_registration_path(resource_name), class: 'link' %>
+    </div>
+  </div>
+</div>
+

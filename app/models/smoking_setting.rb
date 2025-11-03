@@ -5,10 +5,10 @@ class SmokingSetting < ApplicationRecord
   attr_accessor :quit_start_date
 
   # Basic validations aligned with NOT NULL constraints
-  validates :daily_cigarette_count, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :cigarette_price_jpy, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :cigarette_per_pack, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :quit_start_datetime, presence: true
+  validates :daily_cigarette_count, presence: {message: "を入力してください"}, numericality: { only_integer: true, greater_than_or_equal_to: 0, message: "は0以上の整数で入力してください" }
+  validates :cigarette_price_jpy, presence: {message: "を入力してください"}, numericality: { only_integer: true, greater_than_or_equal_to: 0, message: "は0以上の整数で入力してください" }
+  validates :cigarette_per_pack, presence: {message: "を入力してください"}, numericality: { only_integer: true, greater_than: 0, message: "は1以上の整数で入力してください" }
+  validates :quit_start_datetime, presence: {message: "を入力してください"}
 
   before_validation :apply_defaults_and_convert_date
 

@@ -14,6 +14,41 @@
   --shadow: 0 10px 30px rgba(16, 185, 129, 0.08), 0 6px 18px rgba(59, 130, 246, 0.05);
 }
 
+.auth-header-background{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo-back-link{ display:flex; align-items:center; }
+.auth-logo-link{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  transition: background-color .15s ease, filter .15s ease;
+}
+.auth-logo-link:hover{ background-color: rgba(0,0,0,.05); filter: brightness(1.02); }
+.auth-logo{ width: 18px; height: 18px; display:block; }
+
+.back-link .link{
+  display: inline-block;
+  padding: 6px 10px;
+  color: #374151; /* gray-700 */
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.back-link .link:hover{ background-color: rgba(0,0,0,.05); color: #111827; }
+
+/* Optional: split layout (left icon, right text). Add class -split to container */
+.auth-header-background.-split{ justify-content: space-between; }
 .auth-wrapper {
   min-height: 100vh;
   display: flex;
@@ -57,6 +92,17 @@
 .step-indicator.is-done { background: linear-gradient(135deg, var(--primary), var(--accent)); color:#fff; border-color:transparent; }
 
 .auth-form { margin-top: 10px; }
+.auth-form #error_explanation {
+  background: #fff7f7;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+}
+.auth-form #error_explanation h2 { font-size: 14px; margin: 0 0 6px; }
+.auth-form #error_explanation ul { margin: 0; padding-left: 18px; }
+.auth-form #error_explanation li { line-height: 1.4; }
 .form-step { margin-top: 6px; }
 .step-title { font-size: 20px; color: var(--text-main); margin: 6px 0 4px; font-weight: 700; display:flex; align-items:center; gap:6px; }
 .step-title-icon { font-size: 20px; }
@@ -107,4 +153,7 @@
 @media (max-width: 420px) {
   .auth-card { padding: 20px 16px 12px; border-radius: 16px; }
   .step-divider { width: 28px; }
+  .auth-header-background{ padding: 8px 12px; gap: 6px; }
+  .auth-logo-link{ width: 32px; height: 32px; }
+  .back-link .link{ padding: 6px 8px; font-weight: 600; }
 }

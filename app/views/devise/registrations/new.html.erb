@@ -1,3 +1,16 @@
+<header>
+  <div class="auth-header-background">
+    <div class="logo-back-link">
+     <%= link_to root_path, class: 'auth-logo-link' do %>
+     <%= image_tag 'back-svgrepo-com.svg', alt: '', class: 'auth-logo' %>
+     <% end %>
+    </div>
+   <div class="back-link">
+    <%= link_to '戻る', root_path, class: 'link' %>
+   </div>
+  </div>
+</header>
+
 <div class="auth-wrapper">
   <div class="auth-card" data-controller="registration-steps">
     <div class="auth-header">
@@ -15,7 +28,7 @@
       </div>
     </div>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'auth-form', 'data-registration-steps-target': 'form' }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: user_registration_path, html: { class: 'auth-form', 'data-registration-steps-target': 'form', data: { turbo: false } }) do |f| %>
       <%= render 'devise/shared/error_messages', resource: resource %>
 
       <section class="form-step" data-registration-steps-target="step" data-step="1" aria-labelledby="step1-title">
@@ -109,7 +122,7 @@
         </div>
 
         <div class="form-field">
-          <label class="form-label" for="user_reason_to_quit">禁煙の理由（任意）</label>
+          <label class="form-label" for="user_reason_to_quit">禁煙の理由</label>
           <%= f.select :reason_to_quit, [
               ['健康のため', 'health'],
               ['節約のため', 'money'],
@@ -121,7 +134,7 @@
 
         <div class="form-actions between">
           <button type="button" class="btn btn-secondary" data-action="registration-steps#back">戻る</button>
-          <%= f.submit '登録する', class: 'btn btn-submit', data: { action: 'registration-steps#finalize' } %>
+          <%= f.submit '登録する', class: 'btn btn-submit' %>
         </div>
       </section>
     <% end %>
@@ -132,4 +145,3 @@
     </div>
   </div>
 </div>
-
