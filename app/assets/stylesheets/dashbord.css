@@ -1,0 +1,101 @@
+/* Dashboard styles (dashbords#show) */
+
+:root {
+  /* Reuse palette from registration.css if present */
+  --card-bg: #fff;
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 10px 30px rgba(16,185,129,.08), 0 6px 18px rgba(59,130,246,.05);
+  --success: #059669;
+}
+
+.db-wrapper { padding: 16px; }
+
+/* Hero */
+.db-hero { display:flex; align-items:center; justify-content:space-between; gap: 12px; margin-bottom: 14px; }
+.db-hero-title { margin:0; font-size: 24px; font-weight: 800; color: var(--text-main); }
+.db-hero-sub { margin: 4px 0 0; color: var(--text-muted); }
+.text-success { color: var(--success); font-weight: 700; }
+.text-warn { color: #d97706; font-weight: 700; }
+
+.db-hero-badge { display:flex; align-items:center; gap:8px; background: #f0f9ff; border:1px solid #dbeafe; color:#0ea5e9; padding:6px 10px; border-radius: 999px; font-weight:700; box-shadow: 0 6px 14px rgba(14,165,233,.12); }
+.badge-emoji { font-size: 16px; }
+
+/* Tabs */
+.db-tabs { display:flex; gap: 10px; align-items:center; margin: 8px 0 14px; }
+.db-tab { flex: 1 1 0; height: 44px; border-radius: 999px; border:1px solid #dbeafe; background: #eff6ff; color: #1e40af; font-weight:700; cursor:pointer; box-shadow: 0 4px 10px rgba(59,130,246,.12) inset; }
+.db-tab.is-active { background: linear-gradient(135deg, #10b981, #3b82f6); color:#fff; border-color: transparent; box-shadow: 0 8px 16px rgba(16,185,129,.25); }
+.db-tab .tab-icon { margin-right: 6px; }
+
+/* Panels */
+.db-panel { display:block; }
+.db-panel.is-hidden { display:none; }
+
+/* Metric cards */
+.db-metrics { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 12px; margin-bottom: 14px; }
+.metric-card { display:flex; align-items:center; gap: 10px; padding: 16px; border-radius: 16px; color:#fff; box-shadow: var(--shadow); }
+.metric-card .metric-icon { font-size: 22px; }
+.metric-card .metric-main { line-height: 1.15; }
+.metric-card .metric-value { font-size: 22px; font-weight: 800; }
+.metric-card .metric-label { opacity: .9; }
+.metric-card.green { background: linear-gradient(135deg, #10b981, #22c55e); }
+.metric-card.blue { background: linear-gradient(135deg, #3b82f6, #22d3ee); }
+.metric-card.purple { background: linear-gradient(135deg, #7c3aed, #60a5fa); }
+.metric-card.orange { background: linear-gradient(135deg, #fb923c, #f43f5e); }
+.metric-card.red { background: linear-gradient(135deg, #ef4444, #f97316); }
+
+/* Sections */
+.db-section { background: var(--card-bg); border:1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); padding: 12px; margin-bottom: 14px; }
+.db-section-head { display:flex; align-items:center; justify-content:space-between; }
+.db-section .head-left { display:flex; align-items:center; gap:8px; }
+.db-section .head-title { margin:0; font-size: 16px; font-weight: 800; color: var(--text-main); }
+.db-section .btn-ghost { display:inline-block; padding: 8px 12px; border-radius: 999px; background:#f9fafb; color:#2563eb; text-decoration:none; font-weight:700; border:1px solid #e5e7eb; }
+.db-section .btn-ghost:hover { background:#eef2f7; }
+
+.plan-row { display:flex; flex-wrap:wrap; gap: 10px; margin-top: 10px; }
+.plan-chip { flex: 1 1 240px; min-width: 220px; background:#f8fafc; border:1px solid #e5e7eb; border-radius: 14px; padding: 10px; display:flex; align-items:center; justify-content:space-between; }
+.plan-chip.success { background:#ecfdf5; border-color:#a7f3d0; }
+.plan-title { font-weight:700; color:#111827; }
+.chip-btn { height: 32px; padding: 0 12px; border-radius: 999px; border:0; background:#ede9fe; color:#6d28d9; font-weight:700; cursor:pointer; }
+.chip-btn.done { background:#e0e7ff; color:#4338ca; }
+.chip-link { color:#2563eb; text-decoration:none; font-weight:700; margin-left: 6px; }
+
+/* Two-column grid */
+.db-grid-2 { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+.db-card { background: var(--card-bg); border:1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow); padding: 12px; }
+.db-card-head { display:flex; align-items:center; justify-content:space-between; margin-bottom: 8px; }
+.db-card-title { margin:0; font-size: 16px; font-weight:800; color: var(--text-main); }
+
+/* Goal */
+.goal-row { display:flex; flex-direction:column; gap: 10px; }
+.goal-labels { display:flex; gap: 20px; }
+.goal-item .label { color: var(--text-muted); margin-right: 8px; }
+.goal-item .value { font-weight: 800; color: var(--text-main); }
+.goal-bar { height: 10px; background:#eef2f7; border-radius: 999px; overflow:hidden; }
+.goal-bar .bar-fill { display:block; height:100%; background: linear-gradient(90deg, #10b981, #3b82f6); border-radius: 999px; }
+.goal-stats { display:flex; gap: 20px; color: var(--text-main); }
+.goal-stats .stat { font-weight: 800; }
+.goal-stats .stat span { font-weight: 600; color: var(--text-muted); margin-left: 6px; }
+
+/* Health list */
+.health-list { list-style:none; margin:0; padding:0; display:grid; gap: 8px; }
+.health-list li { display:flex; align-items:center; gap: 8px; padding: 8px 10px; background:#f8fafc; border:1px solid #e5e7eb; border-radius: 10px; }
+.health-list li.ok::before { content: '✅'; }
+
+/* Summary */
+.summary-list { list-style:none; margin:0; padding:0; display:grid; gap: 10px; }
+.summary-list li { display:flex; align-items:center; justify-content:space-between; padding: 8px 6px; border-bottom:1px dashed #e5e7eb; }
+.summary-list li:last-child { border-bottom: 0; }
+
+/* History */
+.history-list { display:grid; gap: 8px; }
+.history-item { display:flex; align-items:center; justify-content:space-between; padding: 10px; background:#f8fafc; border:1px solid #e5e7eb; border-radius: 12px; }
+.history-item .title { font-weight:800; color:#111827; }
+.history-item .sub { color: var(--text-muted); font-size: 14px; }
+.pill-link { display:inline-block; padding: 6px 10px; border-radius: 999px; background:#eef2ff; color:#4338ca; text-decoration:none; font-weight:800; }
+
+/* Responsive */
+@media (max-width: 920px) { .db-metrics { grid-template-columns: repeat(2, minmax(0,1fr)); } .db-grid-2 { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .db-tab { font-size: 14px; } }
+

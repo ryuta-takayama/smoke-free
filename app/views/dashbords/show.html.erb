@@ -1,0 +1,215 @@
+<div class="db-wrapper" data-controller="dashboard">
+  <!-- Greeting / streak -->
+  <section class="db-hero">
+    <div class="db-hero-main">
+      <h1 class="db-hero-title">おかえりなさい！</h1>
+      <p class="db-hero-sub">禁煙 <span class="text-success"><%= (@streak_days || 0) %>日目</span> です</p>
+    </div>
+    <div class="db-hero-badge">
+      <span class="badge-emoji">🎉</span>
+      <span class="badge-text">1年達成！</span>
+    </div>
+  </section>
+
+  <!-- Tabs -->
+  <div class="db-tabs">
+    <button class="db-tab is-active" data-action="dashboard#showCurrent" data-dashboard-target="tab" data-tab="current">
+      <span class="tab-icon">▶︎</span> 現在の挑戦
+    </button>
+    <button class="db-tab" data-action="dashboard#showHistory" data-dashboard-target="tab" data-tab="history">
+      <span class="tab-icon">⏱</span> これまでの成果
+    </button>
+  </div>
+
+  <!-- Panel: current challenge -->
+  <section class="db-panel" data-dashboard-target="panel" data-panel="current">
+    <div class="db-metrics">
+      <div class="metric-card green">
+        <div class="metric-icon">📅</div>
+        <div class="metric-main">
+          <div class="metric-value"><%= (@streak_days || 0) %></div>
+          <div class="metric-label">現在の継続</div>
+        </div>
+      </div>
+      <div class="metric-card blue">
+        <div class="metric-icon">💲</div>
+        <div class="metric-main">
+          <div class="metric-value">¥<%= number_with_delimiter(@saved_money_jpy || 0) %></div>
+          <div class="metric-label">現在の節約</div>
+        </div>
+      </div>
+      <div class="metric-card purple">
+        <div class="metric-icon">🚭</div>
+        <div class="metric-main">
+          <div class="metric-value"><%= number_with_delimiter(@avoided_cigarettes || 0) %></div>
+          <div class="metric-label">現在の本数</div>
+        </div>
+      </div>
+      <div class="metric-card orange">
+        <div class="metric-icon">⏰</div>
+        <div class="metric-main">
+          <div class="metric-value"><%= (@abstinence_hours || 0) %></div>
+          <div class="metric-label">禁煙時間（時間）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Today's action plan -->
+    <section class="db-section">
+      <header class="db-section-head">
+        <div class="head-left">
+          <span class="head-icon">⚡️</span>
+          <h2 class="head-title">今日のアクションプラン</h2>
+        </div>
+        <div class="head-right">
+          <a href="#" class="btn-ghost">＋ 追加</a>
+        </div>
+      </header>
+
+      <div class="plan-row">
+        <div class="plan-chip">
+          <div class="plan-title">カフェで読書</div>
+          <div class="plan-actions">
+            <button class="chip-btn done">完了</button>
+          </div>
+        </div>
+        <div class="plan-chip success">
+          <div class="plan-title">30分ウォーキング</div>
+          <div class="plan-actions">
+            <button class="chip-btn">✔ 完了済み</button>
+            <a class="chip-link" href="#">▶ 投稿</a>
+          </div>
+        </div>
+        <div class="plan-chip">
+          <div class="plan-title">音楽を聴く</div>
+          <div class="plan-actions">
+            <button class="chip-btn done">完了</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Goal and health progress -->
+    <div class="db-grid-2">
+      <section class="db-card">
+        <header class="db-card-head">
+          <h3 class="db-card-title">目標達成状況</h3>
+        </header>
+        <div class="goal-row">
+          <div class="goal-labels">
+            <div class="goal-item">
+              <span class="label">目標</span>
+              <span class="value"><%= @goal_item || 'MacBook' %></span>
+            </div>
+            <div class="goal-item">
+              <span class="label">進捗</span>
+              <span class="value">100.0%</span>
+            </div>
+          </div>
+          <div class="goal-bar"><span class="bar-fill" style="width:100%"></span></div>
+          <div class="goal-stats">
+            <div class="stat">¥<%= number_with_delimiter(@goal_saved_jpy || 0) %><span> 貯まった金額</span></div>
+            <div class="stat"><%= (@days_left || 0) %>日<span> 達成まで！</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="db-card">
+        <header class="db-card-head">
+          <h3 class="db-card-title">健康改善の進捗</h3>
+        </header>
+        <ul class="health-list">
+          <li class="ok">禁煙開始 — 新しいスタートです</li>
+          <li class="ok">20分後 — 心拍数・血圧が低下</li>
+          <li class="ok">12時間後 — 血中一酸化炭素が正常化</li>
+          <li class="ok">2日後 — 味覚・嗅覚が改善</li>
+          <li class="ok">2週間後 — 血液循環が改善</li>
+          <li class="ok">1ヶ月後 — 肺機能向上</li>
+        </ul>
+      </section>
+    </div>
+  </section>
+
+  <!-- Panel: history/results -->
+  <section class="db-panel is-hidden" data-dashboard-target="panel" data-panel="history">
+    <div class="db-metrics">
+      <div class="metric-card purple">
+        <div class="metric-icon">🏆</div>
+        <div class="metric-main">
+          <div class="metric-value"><%= (@total_challenges || 0) %></div>
+          <div class="metric-label">総挑戦回数</div>
+        </div>
+      </div>
+      <div class="metric-card green">
+        <div class="metric-icon">📅</div>
+        <div class="metric-main">
+          <div class="metric-value"><%= (@total_days || 0) %></div>
+          <div class="metric-label">累計日数</div>
+        </div>
+      </div>
+      <div class="metric-card blue">
+        <div class="metric-icon">💲</div>
+        <div class="metric-main">
+          <div class="metric-value">¥<%= number_with_delimiter(@total_saved_jpy || 0) %></div>
+          <div class="metric-label">累計節約</div>
+        </div>
+      </div>
+      <div class="metric-card red">
+        <div class="metric-icon">🎗</div>
+        <div class="metric-main">
+          <div class="metric-value"><%= (@best_streak_days || 0) %></div>
+          <div class="metric-label">最長記録（日）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="db-grid-2">
+      <section class="db-card">
+        <header class="db-card-head">
+          <h3 class="db-card-title">成果サマリー</h3>
+        </header>
+        <ul class="summary-list">
+          <li>
+            <span>累計節約本数</span>
+            <strong><%= number_with_delimiter(@total_avoided_cigs || 0) %>本</strong>
+          </li>
+          <li>
+            <span>平均継続期間</span>
+            <strong><%= (@avg_streak_days || 0) %>日</strong>
+          </li>
+          <li>
+            <span>現在の継続期間</span>
+            <strong class="text-success"><%= (@streak_days || 0) %>日</strong>
+          </li>
+          <li>
+            <span>継続中のセッション</span>
+            <strong class="text-warn"><%= (@active_sessions || 0) %>個</strong>
+          </li>
+        </ul>
+      </section>
+
+      <section class="db-card">
+        <header class="db-card-head">
+          <h3 class="db-card-title">過去の挑戦履歴</h3>
+        </header>
+        <div class="history-list">
+          <div class="history-item">
+            <div class="history-main">
+              <div class="title">挑戦 #3</div>
+              <div class="sub">2023/9/10 〜 2023/11/20　節約: ¥41,180</div>
+            </div>
+            <a href="#" class="pill-link">71日継続</a>
+          </div>
+          <div class="history-item">
+            <div class="history-main">
+              <div class="title">挑戦 #2</div>
+              <div class="sub">2023/6/1 〜 2023/7/15　節約: ¥25,520</div>
+            </div>
+            <a href="#" class="pill-link">44日継続</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</div>
+
