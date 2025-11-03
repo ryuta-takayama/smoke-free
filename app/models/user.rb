@@ -6,6 +6,14 @@ class User < ApplicationRecord
 
 
   has_one :smoking_setting, dependent: :destroy, inverse_of: :user
+  has_many :abstinence_sessions, dependent: :destroy
+  has_one :goal, -> { where(status: 0) }, class_name: "Goal"
+  has_many :restart_challenges, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
+  has_many :action_plans, dependent: :destroy
   accepts_nested_attributes_for :smoking_setting
   enum reason_to_quit: { health: 0, money: 1, family: 2, work: 3, other: 4 }
 
