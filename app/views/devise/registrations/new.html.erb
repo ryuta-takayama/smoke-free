@@ -90,6 +90,11 @@
             <%= s.label :cigarette_price_jpy, "タバコ1箱の価格（円）", class: "form-label" %>
             <%= s.number_field :cigarette_price_jpy, min: 0, class: "form-control", placeholder: "例: 580" %>
           </div>
+
+          <div class="form-field">
+            <%= s.label :cigarette_per_pack, "タバコ1箱の本数※未入力の場合は、20本とします", class: "form-label" %>
+            <%= s.number_field :cigarette_per_pack, min: 0, class: "form-control", placeholder: "例: 20" %>
+          </div>
         <% end %>
 
         <div class="form-field">
