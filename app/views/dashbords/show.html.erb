@@ -7,6 +7,7 @@
     </div>
     <div class="actions-right">
       <a href="#" class="action-link">👤 マイアカウント</a>
+      <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "logout-link" %>
       <a href="#" class="action-link">⚙</a>
     </div>
   </header>
