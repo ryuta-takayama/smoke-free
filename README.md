@@ -99,25 +99,12 @@
 
 **Associations**  
 - belongs_to :user  
-- has_one :action_plan, dependent: :destroy  
 - has_many :comments, dependent: :destroy  
 - has_many :likes, dependent: :destroy  
 - has_many :liked_users, through: :likes, source: :user  
 
 ---
 
-## action_plans
-| Column | Type | Options |
-|---|---|---|
-| post | references | null: false, index: true, foreign_key: true |
-| user | references | null: false, index: true, foreign_key: true |
-| body | text | null: false |
-
-**Associations**  
-- belongs_to :post  
-- belongs_to :user  
-
----
 
 ## comments
 | Column | Type | Options |
@@ -150,7 +137,6 @@
 ## 🔗 ER Overview
 - **User** — 1:1 → **SmokingSetting**, **Goal**  
 - **User** — 1:N → **AbstinenceSession**, **RestartChallenge**, **Post**, **Comment**, **Like**  
-- **Post** — 1:1 → **ActionPlan**  
 - **Post** — 1:N → **Comment**, **Like**  
 - **User ↔ Post** — N:N via **Like**  
 - **Quotes** — 固定テーブル（外部キー関係なし）  
@@ -169,7 +155,6 @@ erDiagram
 
   POSTS ||--o{ COMMENTS : "has_many"
   POSTS ||--o{ LIKES : "has_many"
-  POSTS ||--|| ACTION_PLANS : "has_one"
 
   USERS {
     email string
@@ -211,12 +196,6 @@ erDiagram
   }
 
   POSTS {
-    user_id references
-    body text
-  }
-
-  ACTION_PLANS {
-    post_id references
     user_id references
     body text
   }

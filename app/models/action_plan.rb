@@ -1,4 +1,7 @@
+"""
+Deprecated model. The action_plans table has been dropped and this class will be removed.
+Mark as abstract to avoid ActiveRecord expecting a backing table if autoloaded.
+"""
 class ActionPlan < ApplicationRecord
-  belongs_to :post
-  belongs_to :user
+  self.abstract_class = true
 end

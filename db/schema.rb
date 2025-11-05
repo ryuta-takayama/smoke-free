@@ -10,24 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_04_082032) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_05_120000) do
   create_table "abstinence_sessions", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.datetime "started_at", null: false
+    t.datetime "started_at"
     t.datetime "ended_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_abstinence_sessions_on_user_id"
-  end
-
-  create_table "action_plans", charset: "utf8mb3", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
-    t.text "body", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_action_plans_on_post_id"
-    t.index ["user_id"], name: "index_action_plans_on_user_id"
   end
 
   create_table "comments", charset: "utf8mb3", force: :cascade do |t|
@@ -117,8 +107,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_04_082032) do
   end
 
   add_foreign_key "abstinence_sessions", "users"
-  add_foreign_key "action_plans", "posts"
-  add_foreign_key "action_plans", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "goals", "users"

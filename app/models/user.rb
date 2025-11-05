@@ -13,7 +13,6 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_posts, through: :likes, source: :post
-  has_many :action_plans, dependent: :destroy
   accepts_nested_attributes_for :smoking_setting
   enum reason_to_quit: { health: 0, money: 1, family: 2, work: 3, other: 4 }
 

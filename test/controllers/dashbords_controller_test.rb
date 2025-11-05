@@ -1,8 +1,20 @@
 require "test_helper"
 
 class DashbordsControllerTest < ActionDispatch::IntegrationTest
+  def setup
+    @user = User.create!(
+      email: "tester@example.com",
+      password: "Passw0rd",
+      password_confirmation: "Passw0rd",
+      nickname: "tester",
+      age: 25,
+      reason_to_quit: :health
+    )
+  end
+
   test "should get show" do
-    get dashbords_show_url
+    sign_in @user
+    get dashbords_path
     assert_response :success
   end
 end
