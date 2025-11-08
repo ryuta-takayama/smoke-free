@@ -76,30 +76,17 @@
           <h2 class="head-title">今日のアクションプラン</h2>
         </div>
         <div class="head-right">
-          <%= link_to "＋ 追加", new_posts_path, class: "btn-ghost" %>
+          <%= link_to "＋ 追加", new_post_path, class: "btn-ghost" %>
         </div>
       </header>
 
       <div class="plan-row">
-        <div class="plan-chip">
-          <div class="plan-title">カフェで読書</div>
-          <div class="plan-actions">
-            <button class="chip-btn done">完了</button>
+        <% @posts.each do |post| %>
+          <% title = post.body.to_s.lines.first.to_s.strip.presence || '（無題）' %>
+          <div class="plan-chip">
+            <div class="plan-title"><%= title %></div>
           </div>
-        </div>
-        <div class="plan-chip success">
-          <div class="plan-title">30分ウォーキング</div>
-          <div class="plan-actions">
-            <button class="chip-btn">✔ 完了済み</button>
-            <a class="chip-link" href="#">▶ 投稿</a>
-          </div>
-        </div>
-        <div class="plan-chip">
-          <div class="plan-title">音楽を聴く</div>
-          <div class="plan-actions">
-            <button class="chip-btn done">完了</button>
-          </div>
-        </div>
+        <% end %>
       </div>
     </section>
 

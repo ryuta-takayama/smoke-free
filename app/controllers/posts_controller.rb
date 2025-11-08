@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to dashboard_path, notice: "アクションプランを追加しました。"
+      redirect_to dashboards_path, notice: "アクションプランを追加しました。"
     else
       render :new, status: :unprocessable_entity
     end

@@ -63,8 +63,8 @@
 .db-section .btn-ghost { display:inline-block; padding: 8px 12px; border-radius: 999px; background:#f9fafb; color:#2563eb; text-decoration:none; font-weight:700; border:1px solid #e5e7eb; }
 .db-section .btn-ghost:hover { background:#eef2f7; }
 
-.plan-row { display:flex; flex-wrap:wrap; gap: 10px; margin-top: 10px; }
-.plan-chip { flex: 1 1 240px; min-width: 220px; background:#f8fafc; border:1px solid #e5e7eb; border-radius: 14px; padding: 10px; display:flex; align-items:center; justify-content:space-between; }
+.plan-row { display:flex; flex-wrap:nowrap; gap: 10px; margin-top: 10px; overflow-x:auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
+.plan-chip { flex: 0 0 auto; min-width: 390px; background:#f8fafc; border:1px solid #e5e7eb; border-radius: 14px; padding: 10px; display:flex; align-items:center; justify-content:space-around; scroll-snap-align: start; }
 .plan-chip.success { background:#ecfdf5; border-color:#a7f3d0; }
 .plan-title { font-weight:700; color:#111827; }
 .chip-btn { height: 32px; padding: 0 12px; border-radius: 999px; border:0; background:#ede9fe; color:#6d28d9; font-weight:700; cursor:pointer; }
