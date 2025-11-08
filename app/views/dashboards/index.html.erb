@@ -3,23 +3,25 @@
   <header class="db-topbar">
     <div class="brand-left">
       <div class="brand-logo"><%= image_tag 'heart-svgrepo-com.svg', alt: '', class: 'brand-icon' %></div>
-      <div class="brand-name">smoke free</div>
+       <%= link_to "smoke free", root_path, class: "brand-name" %>
     </div>
     <div class="actions-right">
-      <a href="#" class="action-link">👤 マイアカウント</a>
-      <%= link_to "ログアウト", destroy_user_session_path, data: {turbo_method: :delete} , class: "action-link" %>
-      <a href="#" class="action-link">⚙</a>
+      <a href="#" class="action-link-1"> アカウント設定</a>
+      <%= link_to "ログアウト", destroy_user_session_path, data: {turbo_method: :delete} , class: "action-link-2" %>
     </div>
   </header>
   <!-- Greeting / streak -->
   <section class="db-hero">
     <div class="db-hero-main">
-      <h1 class="db-hero-title">おかえりなさい！</h1>
+      <h1 class="db-hero-title">おかえりなさい　<%= @user.nickname %>さん!</h1>
       <p class="db-hero-sub">禁煙 <span class="text-success"><%= (@calc.current_streak_days || 0) %>日目</span> です</p>
     </div>
     <div class="db-hero-badge">
-      <span class="badge-emoji">🎉</span>
-      <span class="badge-text">1年達成！</span>
+      <% badge = latest_streak_badge(@calc.current_streak_days) %>
+      <% if badge %>
+        <%= image_tag badge[:icon], alt: '', class: 'badge-emoji' %>
+        <span class="badge-text"><%= badge[:text] %></span>
+      <% end %>
     </div>
   </section>
 
@@ -37,28 +39,28 @@
   <section class="db-panel" data-dashboard-target="panel" data-panel="current">
     <div class="db-metrics">
       <div class="metric-card green">
-        <div class="metric-icon">📅</div>
+        <%= image_tag "calender-svgrepo-com.svg", alt: '', class: 'metric-icon' %>
         <div class="metric-main">
-          <div class="metric-value"><%= (@calc.current_streak_days || 0) %></div>
-          <div class="metric-label">現在の継続</div>
+          <div class="metric-value"><%= (@calc.current_streak_days || 0) %>日</div>
+          <div class="metric-label">現在の継続期間（日数）</div>
         </div>
       </div>
       <div class="metric-card blue">
-        <div class="metric-icon">💲</div>
+         <%= image_tag "yen-svgrepo-com.svg", alt: '', class: 'metric-icon' %>
         <div class="metric-main">
           <div class="metric-value">¥<%= (@calc.saved_money_jpy || 0) %></div>
           <div class="metric-label">現在の節約額</div>
         </div>
       </div>
       <div class="metric-card purple">
-        <div class="metric-icon">🚭</div>
+        <%= image_tag "no-smoking-svgrepo-com.svg", alt: '', class: 'metric-icon' %>
         <div class="metric-main">
           <div class="metric-value"><%= (@calc.avoided_cigarettes || 0) %></div>
           <div class="metric-label">現在の禁煙本数</div>
         </div>
       </div>
       <div class="metric-card orange">
-        <div class="metric-icon">⏰</div>
+        <%= image_tag "time-twenty-four-svgrepo-com.svg", alt: '', class: 'metric-icon' %>
         <div class="metric-main">
           <div class="metric-value">
             <span data-dashboard-target="timer" data-start-at="<%= @session_start&.iso8601 %>">00:00:00</span>
@@ -72,7 +74,7 @@
     <section class="db-section">
       <header class="db-section-head">
         <div class="head-left">
-          <span class="head-icon">⚡️</span>
+           <%= image_tag "action-solid-svgrepo-com.svg", alt: '', class: 'head-icon' %>
           <h2 class="head-title">今日のアクションプラン</h2>
         </div>
         <div class="head-right">
@@ -119,13 +121,16 @@
         <header class="db-card-head">
           <h3 class="db-card-title">健康改善の進捗</h3>
         </header>
+        <% elapsed_minutes = if @session_start.present?
+             minutes = ((Time.current - @session_start) / 60).to_i
+             minutes.positive? ? minutes : 0
+           else
+             0
+           end %>
         <ul class="health-list">
-          <li class="ok">禁煙開始 — 新しいスタートです</li>
-          <li class="ok">20分後 — 心拍数・血圧が低下</li>
-          <li class="ok">12時間後 — 血中一酸化炭素が正常化</li>
-          <li class="ok">2日後 — 味覚・嗅覚が改善</li>
-          <li class="ok">2週間後 — 血液循環が改善</li>
-          <li class="ok">1ヶ月後 — 肺機能向上</li>
+          <% reached_health_messages(elapsed_minutes).each do |msg| %>
+            <li class="ok"><%= msg %></li>
+          <% end %>
         </ul>
       </section>
     </div>

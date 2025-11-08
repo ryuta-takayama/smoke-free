@@ -6,8 +6,8 @@
   <main class="ap-main">
     <section class="ap-card">
       <h1 class="ap-title">
-        <span class="ap-title-icon">💡</span>
-        1日の中で吸いたくなるような場面を想定しましょう
+         <%= image_tag "light-bulb-idea-svgrepo-com.svg", alt: '', class: 'ap-title-icon' %>
+        <div class="ap-title-text">1日の中で吸いたくなるような場面を想定しましょう</div>
       </h1>
 
       <%= form_with model: @post, url: posts_path, method: :post, class: "ap-form" do |f| %>
