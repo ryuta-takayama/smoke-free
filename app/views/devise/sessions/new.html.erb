@@ -1,16 +1,7 @@
 <% content_for :page_title, "smoke free | ログイン" %>
-<header>
-  <div class="auth-header-background">
-    <div class="logo-back-link">
-      <%= link_to root_path, class: 'auth-logo-link', aria: { label: 'トップへ戻る' } do %>
-        <%= image_tag 'back-svgrepo-com.svg', alt: '', class: 'auth-logo' %>
-      <% end %>
-    </div>
-    <div class="back-link">
-      <%= link_to '戻る', root_path, class: 'link' %>
-    </div>
-  </div>
-</header>
+
+  <%= render 'shared/ap_topbar', icon_to: root_path, back_to: root_path, right: 'ログイン' %>
+
 
 <div class="auth-wrapper">
   <div class="auth-card">

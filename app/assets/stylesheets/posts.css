@@ -9,13 +9,14 @@
 .ap-wrapper { min-height: 100vh; padding: 20px 16px 40px; background: linear-gradient(180deg, #f7fbff 0%, #f8fffb 100%); }
 
 /* Top bar: keep similar vibe to dashboard topbar but simpler */
-.ap-topbar { max-width: 980px; margin: 0 auto 16px; display:flex; align-items:center; justify-content:space-between; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.65); backdrop-filter: blur(10px); border:1px solid #eef2f7; box-shadow: 0 10px 30px rgba(16,185,129,.08), 0 6px 18px rgba(59,130,246,.05); }
-/* Align nested auth header to this page's topbar look */
-.ap-topbar .auth-header-background { background: transparent; border: 0; padding: 0; gap: 8px; }
-.ap-topbar .logo-back-link .auth-logo-link { width: 34px; height: 34px; }
-.ap-topbar .back-link .link { padding: 6px 10px; color:#374151; font-weight:700; text-decoration:none; border-radius:8px; }
-.ap-topbar .back-link .link:hover { background-color: rgba(0,0,0,.05); color:#111827; }
-.ap-right { color:#111827; font-weight:800; font-size:14px; letter-spacing:.02em; }
+.ap-topbar { max-width: 980px; margin: 0 auto 8px; display:flex; align-items:center; justify-content:space-between; padding: 12px 4px; border-radius: 0; background: transparent; border: 0; box-shadow: none; }
+/* Minimal header: left arrow + 戻る */
+.ap-topbar .auth-header-background { display:flex; align-items:center; gap: 10px; background: transparent; border: 0; padding: 0; }
+.ap-topbar .logo-back-link .auth-logo-link { width: 28px; height: 28px; border-radius: 8px; }
+.ap-topbar .auth-logo { width: 20px; height: 20px; display:block; }
+.ap-topbar .back-link .link { padding: 4px 6px; color:#111827; font-weight:800; font-size:18px; text-decoration:none; border-radius:8px; }
+.ap-topbar .back-link .link:hover { background-color: rgba(0,0,0,.04); color:#111827; }
+.ap-right { color:#111827; font-weight:800; font-size:14px; letter-spacing:.02em; white-space: nowrap; }
 
 /* Main card */
 .ap-main { max-width: 980px; margin: 0 auto; }

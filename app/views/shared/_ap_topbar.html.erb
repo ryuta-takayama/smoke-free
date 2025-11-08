@@ -1,0 +1,18 @@
+<%# Shared minimal topbar for action plan related pages %>
+<% right_text = local_assigns.fetch(:right) %>
+<% icon_to  = local_assigns.fetch(:icon_to) %>
+<% back_to  = local_assigns.fetch(:back_to) %>
+
+<header class="ap-topbar">
+  <div class="auth-header-background">
+    <div class="logo-back-link">
+      <%= link_to icon_to, class: 'auth-logo-link', aria: { label: 'トップへ戻る' } do %>
+        <%= image_tag 'back-svgrepo-com.svg', alt: '', class: 'auth-logo' %>
+      <% end %>
+    </div>
+    <div class="back-link">
+      <%= link_to '戻る', back_to, class: 'link' %>
+    </div>
+  </div>
+  <div class="ap-right"><%= right_text %></div>
+</header>

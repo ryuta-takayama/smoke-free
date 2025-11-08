@@ -2,20 +2,7 @@
 <% content_for :page_title, 'アクションプラン設定 | SmokeFree' %>
 
 <div class="ap-wrapper">
-  <header class="ap-topbar">
-   <div class="auth-header-background">
-    <div class="logo-back-link">
-      <%= link_to dashboard_path, class: 'auth-logo-link', aria: { label: 'トップへ戻る' } do %>
-        <%= image_tag 'back-svgrepo-com.svg', alt: '', class: 'auth-logo' %>
-      <% end %>
-    </div>
-    <div class="back-link">
-      <%= link_to '戻る', root_path, class: 'link' %>
-    </div>
-  </div>
-    <div class="ap-right">アクションプラン設定</div>
-  </header>
-
+  <%= render 'shared/ap_topbar',icon_to: dashboard_path, back_to: dashboard_path, right: 'アクションプラン設定' %>
   <main class="ap-main">
     <section class="ap-card">
       <h1 class="ap-title">
@@ -24,7 +11,6 @@
       </h1>
 
       <%= form_with model: @post, url: posts_path, method: :post, class: "ap-form" do |f| %>
-        <label class="ap-example-title" for="post_content">例：</label>
         <%= f.text_area :body,
                         placeholder: "例：\n・朝吸いたくなったら、ニコチンガムを噛む\n・上司にタバコを誘われたら、吸わない言い訳を考えてみる",
                         class: "ap-textarea",
