@@ -1,0 +1,53 @@
+/* Posts#new — Action Plan setup page */
+
+:root {
+  --ap-bg: #f3f6fb;
+  --ap-muted: #9aa6b2;
+  --ap-border: #e5e7eb;
+}
+
+.ap-wrapper { min-height: 100vh; padding: 20px 16px 40px; background: linear-gradient(180deg, #f7fbff 0%, #f8fffb 100%); }
+
+/* Top bar: keep similar vibe to dashboard topbar but simpler */
+.ap-topbar { max-width: 980px; margin: 0 auto 16px; display:flex; align-items:center; justify-content:space-between; padding: 10px 12px; border-radius: 14px; background: rgba(255,255,255,.65); backdrop-filter: blur(10px); border:1px solid #eef2f7; box-shadow: 0 10px 30px rgba(16,185,129,.08), 0 6px 18px rgba(59,130,246,.05); }
+/* Align nested auth header to this page's topbar look */
+.ap-topbar .auth-header-background { background: transparent; border: 0; padding: 0; gap: 8px; }
+.ap-topbar .logo-back-link .auth-logo-link { width: 34px; height: 34px; }
+.ap-topbar .back-link .link { padding: 6px 10px; color:#374151; font-weight:700; text-decoration:none; border-radius:8px; }
+.ap-topbar .back-link .link:hover { background-color: rgba(0,0,0,.05); color:#111827; }
+.ap-right { color:#111827; font-weight:800; font-size:14px; letter-spacing:.02em; }
+
+/* Main card */
+.ap-main { max-width: 980px; margin: 0 auto; }
+.ap-card { background:#fff; border:1px solid var(--ap-border); border-radius: 18px; box-shadow: 0 24px 48px rgba(39, 120, 117, 0.12); padding: 28px; }
+.ap-title { margin: 0 0 16px; font-size: 20px; font-weight: 800; color:#1f2937; display:flex; align-items:center; gap:10px; }
+.ap-title-icon { font-size: 20px; }
+
+/* Form */
+.ap-form { margin-top: 8px; }
+.ap-example-title { display:block; font-weight:700; margin-bottom: 8px; color:#6b7280; }
+.ap-textarea {
+  width: 100%;
+  min-height: 220px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  color: #1f2937;
+  font-size: 16px;
+  line-height: 1.6;
+  outline: none;
+  resize: vertical;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.02);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.ap-textarea:focus { border-color: #93c5fd; box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+.ap-textarea::placeholder { color: #9aa6b2; }
+
+/* Actions */
+.ap-actions { display:flex; justify-content:center; margin-top: 6px; }
+.ap-submit { display:inline-block; height: 46px; line-height:46px; padding: 0 22px; border-radius: 12px; color:#fff; text-decoration:none; font-weight:800; background: linear-gradient(135deg, #f59e0b, #f97316); box-shadow: 0 10px 24px rgba(249, 115, 22, .25); }
+.ap-submit:hover { filter: brightness(1.02); }
+
+/* Small screens */
+@media (max-width: 480px) { .ap-card { padding: 20px; } .ap-title { font-size: 18px; } }

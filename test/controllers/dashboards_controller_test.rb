@@ -1,6 +1,6 @@
 require "test_helper"
 
-class DashbordsControllerTest < ActionDispatch::IntegrationTest
+class DashboardsControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = User.create!(
       email: "tester@example.com",
