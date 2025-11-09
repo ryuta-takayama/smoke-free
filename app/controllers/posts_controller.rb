@@ -17,6 +17,12 @@ class PostsController < ApplicationController
     @posts = Post.includes(:user).order(created_at: :desc)
   end
 
+  def destroy
+    @post = current_user.posts.find(params[:id])
+    @post.destroy
+    redirect_to posts_path, notice: "アクションプランを削除しました。"
+  end
+
 
   private
 
