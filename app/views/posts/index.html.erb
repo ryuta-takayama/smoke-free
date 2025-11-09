@@ -47,7 +47,7 @@
                   </summary>
                   <div class="tl-dropdown" role="menu">
                     <%= link_to '編集', edit_post_path(post), class: 'tl-dd-item', role: 'menuitem' %>
-                    <%= link_to '削除', posts_path(post), class: 'tl-dd-item danger', role: 'menuitem',
+                    <%= link_to '削除', post_path(post), class: 'tl-dd-item danger', role: 'menuitem',
                                 data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
                   </div>
                 </details>
