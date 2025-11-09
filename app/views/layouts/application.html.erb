@@ -13,6 +13,7 @@
   </head>
   <body>
     <div data-controller="flash"
+         data-flash-style-value="toast"
          data-flash-notice-value="<%= flash[:notice].to_s %>"
          data-flash-alert-value="<%= flash[:alert].to_s %>"></div>
     <%= yield %>
