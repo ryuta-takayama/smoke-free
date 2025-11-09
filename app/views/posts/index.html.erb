@@ -1,0 +1,67 @@
+<%# Page title for layout %>
+<% content_for :page_title, 'タイムライン|smoke free' %>
+
+<div class="tl-wrapper">
+  <div class="tl-topbar">
+    <%= render 'shared/ap_topbar', icon_to: dashboards_path, back_to: dashboards_path, right: 'タイムライン' %>
+  </div>
+
+  <main class="tl-main">
+    <% posts = Array(@posts) %>
+    <% if posts.empty? %>
+      <p class="tl-empty">まだ投稿がありません。</p>
+    <% else %>
+      <div class="tl-feed">
+        <% posts.each_with_index do |post, idx| %>
+          <section class="tl-card">
+            <header class="tl-card-head">
+              <div class="tl-user">
+              <%= image_tag 'user-svgrepo-com.svg', alt: '', class: 'tl-user-icon'%>  
+              <%= post.user&.nickname || 'ユーザー' %>
+              </div>
+              <% t = post.created_at&.in_time_zone %>
+              <% wdays = %w(日 月 火 水 木 金 土) %>
+              <div class="tl-time"><%= t&.strftime('%Y/%m/%d %H:%M') %>（<%= wdays[t.wday] if t %>）</div>
+            </header>
+
+            <div class="tl-body">
+              <%= simple_format(post.body.to_s) %>
+            </div>
+
+            <div class="tl-actions">
+              <div class="tl-action1">
+               <div class="tl-comment">
+                <%= image_tag 'comments-svgrepo-com.svg', alt: '', class: 'tl-icon' %>
+                <span>コメントする</span>
+               </div>
+               <div class="tl-like">
+                <%= image_tag 'heart-svgrepo-com.svg', alt: '', class: 'tl-icon heart' %>
+                <span>いいね！</span>
+               </div>
+              </div>
+              <% if user_signed_in? && post.user_id == current_user.id %>
+              <div class="tl-action2">
+                <details class="tl-menu">
+                  <summary class="tl-menu-button">
+                    <%= image_tag 'menu-dots-svgrepo-com.svg', alt: '', class: 'tl-icon menu' %>
+                  </summary>
+                  <div class="tl-dropdown" role="menu">
+                    <%= link_to '編集', edit_post_path(post), class: 'tl-dd-item', role: 'menuitem' %>
+                    <%= link_to '削除', post_path(post), class: 'tl-dd-item danger', role: 'menuitem',
+                                data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' } %>
+                  </div>
+                </details>
+              </div>
+              <% end %>
+            </div>
+          </section>
+
+          <%# divider between cards %>
+          <% if idx < posts.size - 1 %>
+            <hr class="tl-divider" />
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </main>
+</div>

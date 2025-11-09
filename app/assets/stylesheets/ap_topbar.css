@@ -1,0 +1,10 @@
+/* Shared minimal topbar used by _ap_topbar.html.erb */
+
+.ap-topbar { max-width: 980px; margin: 0 auto 8px; display:flex; align-items:center; justify-content:space-between; padding: 12px 4px; border-radius: 0; background: transparent; border: 0; box-shadow: none; }
+.ap-topbar .auth-header-background { display:flex; align-items:center; gap: 10px; background: transparent; border: 0; padding: 0; }
+.ap-topbar .logo-back-link .auth-logo-link { width: 28px; height: 28px; border-radius: 8px; }
+.ap-topbar .auth-logo { width: 20px; height: 20px; display:block; }
+.ap-topbar .back-link .link { padding: 4px 6px; color:#111827; font-weight:800; font-size:14px; text-decoration:none; border-radius:8px; }
+.ap-topbar .back-link .link:hover { background-color: rgba(0,0,0,.04); color:#111827; }
+.ap-right { color:#111827; font-weight:800; font-size:14px; letter-spacing:.02em; white-space: nowrap; }
+

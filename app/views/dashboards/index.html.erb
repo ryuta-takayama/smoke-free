@@ -222,13 +222,13 @@
 
   <!-- Footer quick links -->
   <footer class="db-footer-links">
-    <a href="#" class="footer-card">
+      <%= link_to posts_path, class: 'footer-card' do %>
       <span class="f-icon">📊</span>
       <div class="f-main">
         <div class="f-title">タイムライン</div>
         <div class="f-sub">詳細な記録を見る</div>
       </div>
-    </a>
+      <% end %>
     <a href="#" class="footer-card">
       <span class="f-icon">🎯</span>
       <div class="f-main">

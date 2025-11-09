@@ -14,8 +14,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @user = find(params[:user_id])
-    @posts = @user.posts.includes(:user).order(created_at: :desc)
+    @posts = Post.includes(:user).order(created_at: :desc)
   end
 
 
