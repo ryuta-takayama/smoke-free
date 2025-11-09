@@ -13,6 +13,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def index
+    @user = find(params[:user_id])
+    @posts = @user.posts.includes(:user).order(created_at: :desc)
+  end
+
+
   private
 
   def post_params
