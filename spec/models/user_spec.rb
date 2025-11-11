@@ -53,6 +53,14 @@ RSpec.describe User, type: :model do
           expect(user).to be_valid
         end
       end
+
+      it 'emailは大文字小文字と空白を区別しない' do
+        user = FactoryBot.create(:user, email: ' TEST@Example.com ')
+        user.reload
+        expect(user.email).to eq('test@example.com')
+      end
+
+      
   end
  end
 end
