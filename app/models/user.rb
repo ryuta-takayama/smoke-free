@@ -43,8 +43,7 @@ class User < ApplicationRecord
    presence: true,
    numericality: { only_integer: true, greater_than_or_equal_to: 20, message: "は20以上である必要があります" }
 
-   validates :reason_to_quit,
-    presence: true
+   validates :reason_to_quit, presence: true
 
 
  
