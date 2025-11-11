@@ -60,7 +60,24 @@ RSpec.describe User, type: :model do
         expect(user.email).to eq('test@example.com')
       end
 
-      
+      it 'user作成時に関連（smoking_setting,abstinence_session）も作成・保存される' do
+        expect {
+          user = FactoryBot.create(:user)
+          expect(user.smoking_setting).to be_present
+          expect(user.abstinence_sessions.size).to eq(1)
+          expect(user.abstinence_sessions.first.started_at).to be_within(1.second).of(user.smoking_setting.quit_start_datetime)
+        }.to change(SmokingSetting, :count).by(1)
+         .and change(AbstinenceSession, :count).by(1)
+      end  
+
+      it 'ネスト属性でsmoking_setting、abstinence_sessionを作成される' do
+        attrs = FactoryBot.attributes_for(:smoking_setting)
+        user = FactoryBot.build(:user, smoking_setting_attributes: attrs)
+        expect(user.save).to be true
+        expect(user.smoking_setting).to be_present
+        expect(user.abstinence_sessions.size).to eq(1)
+        expect(user.abstinence_sessions.first.started_at).to be_within(1.second).of(user.smoking_setting.quit_start_datetime)
+      end
   end
  end
 end
