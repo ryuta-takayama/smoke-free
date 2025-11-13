@@ -78,6 +78,40 @@ RSpec.describe User, type: :model do
         expect(user.abstinence_sessions.size).to eq(1)
         expect(user.abstinence_sessions.first.started_at).to be_within(1.second).of(user.smoking_setting.quit_start_datetime)
       end
+
+      context '新規登録がうまくいかないとき' do
+
+        it 'nicknameが空では登録できない' do
+          user = FactoryBot.build(:user, nickname: '')
+          user.valid?
+          expect(user.errors.full_messages).to include("ニックネームを入力してください")
+        end
+
+        it 'nicknameが1文字以下では登録できない' do
+          user = FactoryBot.build(:user, nickname: 'a')
+          user.valid?
+          expect(user.errors.full_messages).to include("ニックネームは2文字以上で入力してください")
+        end
+
+        it 'nicknameが31文字以上では登録できない' do
+          user = FactoryBot.build(:user, nickname: 'a' * 31)
+          user.valid?
+          expect(user.errors.full_messages).to include("ニックネームは30文字以内で入力してください")
+        end
+
+        [
+          '　',      
+          "\t",     
+          "\n",     
+          '\t\n',  
+        ].each do |invalid_nickname|
+          it "#{invalid_nickname.inspect}は無効なニックネームである" do
+            user = FactoryBot.build(:user, nickname: invalid_nickname)
+            user.valid?
+            expect(user.errors.full_messages).to include("ニックネームは空白のみにはできません")
+          end
+        end
+      end
   end
  end
 end

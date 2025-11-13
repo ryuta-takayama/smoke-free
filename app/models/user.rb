@@ -23,27 +23,27 @@ class User < ApplicationRecord
   before_validation :normalize_fields
 
   validates :nickname, 
-   presence: true,
-   length: {minimum: 2, maximum: 30},
-   format: {with: /\A(?!\s*\z).+\z/, message: "ニックネームは空白のみにはできません"}
+   presence: {message: "を入力してください"},
+   length: {minimum: 2, maximum: 30, too_short: "は2文字以上で入力してください", too_long: "は30文字以内で入力してください"},
+   format: {with: /\A(?!\s*\z).+\z/, message: "は空白のみにはできません"}
 
 
   validates :email,
-    presence: true,
+    presence: {message: "メールアドレスを入力してください"},
     uniqueness: {case_sensitive: false},
     format: {with: URI::MailTo::EMAIL_REGEXP, message: "有効なメールアドレスを入力してください"}
 
   validates :password,
-    presence: true,
+    presence: {message: "パスワードを入力してください"},
     length: {minimum: 6},
-    format: {with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).+\z/, message: "パスワードは英字と数字の両方を含めてください"},
+    format: {with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).+\z/, message: "は英字と数字の両方を含めてください"},
     if: :password_required?
 
   validates :age,
-   presence: true,
+   presence: {message: "年齢を入力してください"},
    numericality: { only_integer: true, greater_than_or_equal_to: 20, message: "は20以上である必要があります" }
 
-   validates :reason_to_quit, presence: true
+   validates :reason_to_quit, presence: {message: "禁煙理由を選択してください"}
 
 
  
