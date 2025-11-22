@@ -40,10 +40,7 @@
                  <%= image_tag 'comments-svgrepo-com.svg', alt: '', class: 'tl-icon' %>
                  <span>コメントする</span>
                <% end %>
-               <div class="tl-like">
-                <%= image_tag 'heart-svgrepo-com.svg', alt: '', class: 'tl-icon heart' %>
-                <span>いいね！</span>
-               </div>
+               <%= render 'posts/like_panel', post: post %>
               </div>
               <% if user_signed_in? && post.user_id == current_user.id %>
               <div class="tl-action2">
@@ -71,3 +68,4 @@
     <% end %>
   </main>
 </div>
+

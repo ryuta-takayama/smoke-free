@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :dashboards
   resources :posts do
     resources :comments, only: [:create, :destroy]
-    resources :likes, only: [:create, :destroy]
+    resource :like, only: [:create, :destroy]
   end
 
 

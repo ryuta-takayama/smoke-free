@@ -1,0 +1,14 @@
+<% post = local_assigns.fetch(:post) %>
+<% liked = current_user&.likes&.exists?(post: post) %>
+
+<%= turbo_frame_tag dom_id(post, :like_panel) do %>
+  <div class="tl-like">
+    <%= link_to post_like_path(post),
+                data: { turbo_method: liked ? :delete : :post },
+                class: "tl-like-link #{'is-liked' if liked}" do %>
+      <%= image_tag 'heart-svgrepo-com.svg', alt: '', class: 'tl-icon heart' %>
+      <span><%= liked ? 'いいねをやめる' : 'いいね！' %></span>
+    <% end %>
+    <span class="like-count"><%= post.likes.count %></span>
+  </div>
+<% end %>
