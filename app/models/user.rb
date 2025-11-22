@@ -29,21 +29,21 @@ class User < ApplicationRecord
 
 
   validates :email,
-    presence: {message: "メールアドレスを入力してください"},
+    presence: true,
     uniqueness: {case_sensitive: false},
-    format: {with: URI::MailTo::EMAIL_REGEXP, message: "有効なメールアドレスを入力してください"}
+    format: {with: URI::MailTo::EMAIL_REGEXP}
 
   validates :password,
-    presence: {message: "パスワードを入力してください"},
+    presence:true,
     length: {minimum: 6},
-    format: {with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).+\z/, message: "は英字と数字の両方を含めてください"},
+    format: {with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).+\z/ },
     if: :password_required?
 
   validates :age,
-   presence: {message: "年齢を入力してください"},
-   numericality: { only_integer: true, greater_than_or_equal_to: 20, message: "は20以上である必要があります" }
+   presence: true,
+   numericality: { only_integer: true, greater_than_or_equal_to: 20 }
 
-   validates :reason_to_quit, presence: {message: "禁煙理由を選択してください"}
+   validates :reason_to_quit, presence: true
 
 
  
@@ -69,3 +69,4 @@ class User < ApplicationRecord
   end
 
 end
+

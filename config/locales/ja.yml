@@ -1,0 +1,25 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        age: "年齢"
+        reason_to_quit: "禁煙理由"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "を入力してください"
+              taken: "はすでに存在します"
+              invalid: "^有効なメールアドレスを入力してください"
+            password:
+              blank: "を入力してください"
+              too_short: "は%{count}文字以上で入力してください"
+              invalid: "は英字と数字の両方を含めてください"
+            age:
+              blank: "を入力してください"
+              greater_than_or_equal_to: "は%{count}歳以上である必要があります"
+            reason_to_quit:
+              blank: "を選択してください"

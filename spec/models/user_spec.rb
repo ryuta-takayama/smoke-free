@@ -110,8 +110,64 @@ RSpec.describe User, type: :model do
             expect(user.errors.full_messages).to include("Nickname は空白のみにはできません")
           end
         end
+
+        it 'emailが空では登録できない' do
+          user = FactoryBot.build(:user, email: '')
+          user.valid?
+          expect(user.errors.full_messages).to include("Email can't be blank")
+        end
+
+        it '既に登録済みのemailは使用できない' do
+          FactoryBot.create(:user, email: 'test@example.com')
+          user = FactoryBot.build(:user, email: 'test@example.com')
+          user.valid?
+          expect(user.errors.full_messages).to include("Email has already been taken")
+        end
+
+        it 'emailのフォーマットが不正だと登録できない' do
+          user = FactoryBot.build(:user, email: 'invalid-email')
+          user.valid?
+          expect(user.errors.full_messages).to include("Email is invalid")
+        end
+        it 'passwordが空では登録できない' do
+          user = FactoryBot.build(:user, password: '')
+          user.valid?
+          expect(user.errors.full_messages).to include("Password can't be blank")
+        end
+        it 'passwordが5文字以下では登録できない' do
+          user = FactoryBot.build(:user, password: 'a1b2c', password_confirmation: 'a1b2c')
+          user.valid?
+          expect(user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+        end
+        it 'passwordが英字のみでは登録できない' do
+          user = FactoryBot.build(:user, password: 'abcdef', password_confirmation: 'abcdef')
+          user.valid?
+          expect(user.errors.full_messages).to include("Password is invalid")
+        end
+        it 'passwordが数字のみでは登録できない' do
+          user = FactoryBot.build(:user, password: '123456', password_confirmation: '123456')
+          user.valid?
+          expect(user.errors.full_messages).to include("Password is invalid")
+        end
+        it 'ageが空では登録できない' do
+          user = FactoryBot.build(:user, age: nil)
+          user.valid?
+          expect(user.errors.full_messages).to include("Age can't be blank")
+        end
+        it 'ageが20未満では登録できない' do
+          user = FactoryBot.build(:user, age: 19)
+          user.valid?
+          expect(user.errors.full_messages).to include("Age must be greater than or equal to 20")
+        end
+        it 'reason_to_quitが空では登録できない' do
+          user = FactoryBot.build(:user, reason_to_quit: nil)
+          user.valid?
+          expect(user.errors.full_messages).to include("Reason to quit can't be blank")
+        end
+
       end
   end
  end
 end
  
+
