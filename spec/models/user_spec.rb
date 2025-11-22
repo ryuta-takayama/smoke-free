@@ -162,7 +162,7 @@ RSpec.describe User, type: :model do
         it 'reason_to_quitが空では登録できない' do
           user = FactoryBot.build(:user, reason_to_quit: nil)
           user.valid?
-          expect(user.errors.full_messages).to include("Reason to quit can't be blank")
+          expect(user.errors.full_messages).to include("Reason to quit can't be blank8")
         end
 
       end

@@ -21,7 +21,13 @@
               </div>
               <% t = post.created_at&.in_time_zone %>
               <% wdays = %w(日 月 火 水 木 金 土) %>
-              <div class="tl-time"><%= t&.strftime('%Y/%m/%d %H:%M') %>（<%= wdays[t.wday] if t %>）</div>
+              <div class="tl-time"><%= t&.strftime('%Y/%m/%d %H:%M') %>（<%= wdays[t.wday] if t %>）
+
+              
+    <% if post.updated_at && post.updated_at != post.created_at %>
+     <span class="tl-edited">(編集済み: <%= post.updated_at.in_time_zone.strftime('%Y/%m/%d %H:%M') %>)</span>
+    <% end %>
+              </div>
             </header>
 
             <div class="tl-body">

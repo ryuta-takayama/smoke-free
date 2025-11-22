@@ -1,0 +1,41 @@
+<% content_for :page_title, '投稿を編集 | smoke free' %>
+
+<div class="pe-wrapper">
+  <div class="pe-topbar">
+    <%= render 'shared/ap_topbar', icon_to: posts_path, back_to: posts_path, right: '投稿を編集' %>
+  </div>
+
+  <main class="pe-main">
+    <section class="pe-card">
+      <header class="pe-card-head">
+        <div class="pe-user">
+          <%= image_tag 'user-svgrepo-com.svg', alt: '', class: 'pe-user-icon' %>
+          <div>
+            <div class="pe-user-name"><%= @post.user&.nickname || 'ユーザー' %></div>
+            <% t = @post.created_at&.in_time_zone %>
+            <% wdays = %w(日 月 火 水 木 金 土) %>
+            <div class="pe-meta">
+              投稿日時 <%= t&.strftime('%Y/%m/%d %H:%M') %>（<%= wdays[t.wday] if t %>）
+            </div>
+          </div>
+        </div>
+        <div class="pe-pill">編集</div>
+      </header>
+
+      <div class="pe-form-wrap">
+        <%= form_with model: @post, url: post_path(@post), method: :patch, class: 'pe-form' do |f| %>
+          <label for="post_body" class="pe-label">本文</label>
+          <%= f.text_area :body,
+                          placeholder: '今の気持ちや取り組みを残しておきましょう。',
+                          class: 'pe-textarea',
+                          id: 'post_body' %>
+
+          <div class="pe-actions">
+            <%= link_to 'キャンセル', posts_path, class: 'pe-cancel' %>
+            <%= f.submit '更新する', class: 'pe-save' %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+  </main>
+</div>
