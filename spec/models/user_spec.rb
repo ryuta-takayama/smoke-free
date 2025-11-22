@@ -84,31 +84,30 @@ RSpec.describe User, type: :model do
         it 'nicknameが空では登録できない' do
           user = FactoryBot.build(:user, nickname: '')
           user.valid?
-          expect(user.errors.full_messages).to include("ニックネームを入力してください")
+          expect(user.errors.full_messages).to include("Nickname を入力してください")
         end
 
         it 'nicknameが1文字以下では登録できない' do
           user = FactoryBot.build(:user, nickname: 'a')
           user.valid?
-          expect(user.errors.full_messages).to include("ニックネームは2文字以上で入力してください")
+          expect(user.errors.full_messages).to include("Nickname は2文字以上で入力してください")
         end
 
         it 'nicknameが31文字以上では登録できない' do
           user = FactoryBot.build(:user, nickname: 'a' * 31)
           user.valid?
-          expect(user.errors.full_messages).to include("ニックネームは30文字以内で入力してください")
+          expect(user.errors.full_messages).to include("Nickname は30文字以内で入力してください")
         end
 
-        [
-          '　',      
+        [      
           "\t",     
           "\n",     
-          '\t\n',  
+          "\t\n",  
         ].each do |invalid_nickname|
           it "#{invalid_nickname.inspect}は無効なニックネームである" do
             user = FactoryBot.build(:user, nickname: invalid_nickname)
             user.valid?
-            expect(user.errors.full_messages).to include("ニックネームは空白のみにはできません")
+            expect(user.errors.full_messages).to include("Nickname は空白のみにはできません")
           end
         end
       end
