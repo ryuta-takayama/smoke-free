@@ -27,7 +27,6 @@
         <%= simple_format(@post.body.to_s) %>
       </div>
     </section>
-
     <%= render 'comments/panel', post: @post, comments: @post.comments.includes(:user) %>
   </main>
 </div>
