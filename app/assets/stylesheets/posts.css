@@ -57,6 +57,7 @@
 .tl-user { font-weight: 800; color:#1f2937; letter-spacing: .02em; }
 .tl-user-icon { width: 32px; height: 32px; margin-right: 8px; vertical-align: middle; }
 .tl-time { color:#6b7280; font-weight:700; letter-spacing: .15em; }
+.tl-edited { margin-left: 8px; letter-spacing: .08em; }
 
 .tl-body { min-height: 90px; color:#111827; line-height:1.7; }
 
@@ -64,9 +65,11 @@
 .tl-action1 { display:flex; justify-content:flex-start; align-items:center; gap: 20px; }
 .tl-action2 { display:flex; justify-content:flex-end; align-items:center; gap: 20px; }
 /* Make inner items (e.g., .tl-comment, .tl-like, .tl-menu) horizontal */
-.tl-action1 > div, .tl-action2 > div { display:flex; align-items:center; gap: 10px; color:#111827; font-weight:700; text-decoration:none; }
+.tl-action1 > div, .tl-action2 > div,
+.tl-action1 > a, .tl-action2 > a { display:flex; align-items:center; gap: 10px; color:#111827; font-weight:700; text-decoration:none; }
 .tl-icon { width: 26px; height: 26px; display:block; }
 .tl-icon.heart { width: 34px; height: 34px; }
+.tl-comment:hover { color:#0ea5e9; }
 
 /* 3-dots dropdown */
 .tl-menu { position: relative; }
@@ -84,6 +87,8 @@
   .tl-card { padding: 20px; }
   .tl-time { letter-spacing: .12em; font-size: 14px; }
 }
+
+.tl-card-show { margin-top: 6px; }
 
 /* Posts#edit */
 .pe-wrapper { min-height: 100vh; padding: 20px 16px 40px; background: #f3f6fb; }
@@ -153,4 +158,65 @@
   .pe-card-head { flex-direction:column; align-items:flex-start; gap: 6px; }
   .pe-actions { flex-direction:column-reverse; align-items:stretch; }
   .pe-cancel, .pe-save { width: 100%; text-align:center; }
+}
+
+/* Comments shared UI */
+.cmt-panel { margin-top: 18px; background:#fff; border:1px solid var(--ap-border); border-radius: 18px; box-shadow: 0 14px 32px rgba(39,120,117,0.12); padding: 20px 22px; }
+.cmt-panel-head { display:flex; align-items:center; justify-content:space-between; gap: 12px; margin-bottom: 14px; }
+.cmt-panel-title { display:flex; align-items:center; gap: 12px; color:#1f2937; }
+.cmt-panel-icon { width: 30px; height: 30px; }
+.cmt-panel-label { font-weight: 800; letter-spacing: .04em; font-size: 16px; }
+.cmt-panel-sub { color:#6b7280; font-weight: 600; letter-spacing: .02em; font-size: 13px; }
+.cmt-count { font-weight: 800; color:#1f2937; background:#f3f6fb; padding: 6px 12px; border-radius: 12px; letter-spacing: .04em; }
+
+.cmt-form-card { background:#f8fafc; border:1px solid var(--ap-border); border-radius: 14px; padding: 14px; margin-bottom: 16px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.6); }
+.cmt-form { display:flex; flex-direction:column; gap: 10px; }
+.cmt-label { font-weight: 800; color:#1f2937; letter-spacing: .02em; }
+.cmt-textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  color: #111827;
+  font-size: 15px;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.cmt-textarea:focus { border-color: #93c5fd; box-shadow: 0 0 0 3px rgba(59,130,246,.12); }
+.cmt-textarea::placeholder { color: #9aa6b2; }
+.cmt-actions { display:flex; justify-content:flex-end; }
+.cmt-submit {
+  height: 42px;
+  padding: 0 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0ea5e9, #2563eb);
+  color:#fff;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(37,99,235,.22);
+}
+.cmt-submit:hover { filter: brightness(1.02); }
+
+.cmt-list { display:flex; flex-direction:column; gap: 12px; }
+.cmt-item { border:1px solid var(--ap-border); border-radius: 14px; padding: 14px 16px; background:#fff; box-shadow: 0 10px 20px rgba(39,120,117,0.08); }
+.cmt-item-head { display:flex; align-items:center; justify-content:space-between; gap: 10px; margin-bottom: 10px; }
+.cmt-user { display:flex; align-items:center; gap: 10px; }
+.cmt-user-icon { width: 26px; height: 26px; }
+.cmt-user-name { font-weight: 800; color:#1f2937; letter-spacing: .02em; }
+.cmt-meta { color:#6b7280; font-weight:700; letter-spacing: .08em; font-size: 13px; }
+.cmt-delete { color:#dc2626; font-weight: 700; text-decoration:none; }
+.cmt-delete:hover { text-decoration: underline; }
+.cmt-body { color:#111827; line-height:1.6; }
+.cmt-empty { margin: 8px 0 0; color:#6b7280; }
+
+@media (max-width: 640px) {
+  .cmt-panel { padding: 18px; }
+  .cmt-item-head { flex-direction:column; align-items:flex-start; }
+  .cmt-actions { justify-content:stretch; }
+  .cmt-submit { width: 100%; }
 }

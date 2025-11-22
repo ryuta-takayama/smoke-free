@@ -1,0 +1,19 @@
+<%# Comment form for a given post %>
+<% post = local_assigns.fetch(:post) %>
+
+<%= turbo_frame_tag dom_id(post, :new_comment) do %>
+  <%= form_with model: [post, Comment.new],
+                url: post_comments_path(post),
+                method: :post,
+                data: { turbo_frame: dom_id(post, :comments_panel) },
+                class: 'cmt-form' do |f| %>
+    <label for="comment_body" class="cmt-label">コメントを残す</label>
+    <%= f.text_area :body,
+                    placeholder: '気持ちや気付き、応援メッセージなどを書いてみましょう。',
+                    class: 'cmt-textarea',
+                    id: 'comment_body' %>
+    <div class="cmt-actions">
+      <%= f.submit 'コメントする', class: 'cmt-submit' %>
+    </div>
+  <% end %>
+<% end %>

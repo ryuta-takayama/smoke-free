@@ -1,0 +1,26 @@
+<%# Single comment block. Expects locals: comment, post %>
+<% comment = local_assigns.fetch(:comment) %>
+<% post    = local_assigns.fetch(:post, comment.post) %>
+
+<article class="cmt-item">
+  <header class="cmt-item-head">
+    <div class="cmt-user">
+      <%= image_tag 'user-svgrepo-com.svg', alt: '', class: 'cmt-user-icon' %>
+      <div>
+        <div class="cmt-user-name"><%= comment.user&.nickname || 'ユーザー' %></div>
+        <% t = comment.created_at&.in_time_zone %>
+        <% wdays = %w(日 月 火 水 木 金 土) %>
+        <div class="cmt-meta"><%= t&.strftime('%Y/%m/%d %H:%M') %>（<%= wdays[t.wday] if t %>）</div>
+      </div>
+    </div>
+    <% if user_signed_in? && comment.user_id == current_user.id %>
+      <%= link_to '削除', post_comment_path(post, comment),
+                  class: 'cmt-delete',
+                  data: { turbo_method: :delete, turbo_confirm: 'コメントを削除しますか？' } %>
+    <% end %>
+  </header>
+
+  <div class="cmt-body">
+    <%= simple_format(comment.body.to_s) %>
+  </div>
+</article>

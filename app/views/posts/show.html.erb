@@ -1,0 +1,33 @@
+<% content_for :page_title, '投稿詳細 | smoke free' %>
+
+<div class="tl-wrapper">
+  <div class="tl-topbar">
+    <%= render 'shared/ap_topbar', icon_to: posts_path, back_to: posts_path, right: '投稿詳細' %>
+  </div>
+
+  <main class="tl-main">
+    <section class="tl-card tl-card-show">
+      <header class="tl-card-head">
+        <div class="tl-user">
+          <%= image_tag 'user-svgrepo-com.svg', alt: '', class: 'tl-user-icon'%>
+          <%= @post.user&.nickname || 'ユーザー' %>
+        </div>
+        <% created_at = @post.created_at&.in_time_zone %>
+        <% updated_at = @post.updated_at&.in_time_zone %>
+        <% wdays = %w(日 月 火 水 木 金 土) %>
+        <div class="tl-time">
+          <span><%= created_at&.strftime('%Y/%m/%d %H:%M') %>（<%= wdays[created_at.wday] if created_at %>）</span>
+          <% if updated_at && created_at && updated_at > created_at %>
+            <span class="tl-edited">・ 編集 <%= updated_at.strftime('%Y/%m/%d %H:%M') %>（<%= wdays[updated_at.wday] %>）</span>
+          <% end %>
+        </div>
+      </header>
+
+      <div class="tl-body">
+        <%= simple_format(@post.body.to_s) %>
+      </div>
+    </section>
+
+    <%= render 'comments/panel', post: @post, comments: @post.comments.includes(:user) %>
+  </main>
+</div>

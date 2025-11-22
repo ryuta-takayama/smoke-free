@@ -36,10 +36,10 @@
 
             <div class="tl-actions">
               <div class="tl-action1">
-               <div class="tl-comment">
-                <%= image_tag 'comments-svgrepo-com.svg', alt: '', class: 'tl-icon' %>
-                <span>コメントする</span>
-               </div>
+               <%= link_to post_path(post), class: 'tl-comment' do %>
+                 <%= image_tag 'comments-svgrepo-com.svg', alt: '', class: 'tl-icon' %>
+                 <span>コメントする</span>
+               <% end %>
                <div class="tl-like">
                 <%= image_tag 'heart-svgrepo-com.svg', alt: '', class: 'tl-icon heart' %>
                 <span>いいね！</span>

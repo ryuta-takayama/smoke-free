@@ -1,0 +1,32 @@
+<%# Full comments thread panel. Expects locals: post, comments (optional) %>
+<% post     = local_assigns.fetch(:post) %>
+<% comments = Array(local_assigns.fetch(:comments, post.comments.includes(:user))) %>
+
+<%= turbo_frame_tag dom_id(post, :comments_panel) do %>
+  <section class="cmt-panel">
+    <header class="cmt-panel-head">
+      <div class="cmt-panel-title">
+        <%= image_tag 'comments-svgrepo-com.svg', alt: '', class: 'cmt-panel-icon' %>
+        <div>
+          <div class="cmt-panel-label">コメント</div>
+          <div class="cmt-panel-sub">みんなの声をシェアしよう</div>
+        </div>
+      </div>
+      <div class="cmt-count"><%= comments.size %>件</div>
+    </header>
+
+    <div class="cmt-form-card">
+      <%= render 'comments/form', post: post %>
+    </div>
+
+    <div class="cmt-list">
+      <% if comments.any? %>
+        <% comments.each do |comment| %>
+          <%= render 'comments/comment', comment: comment, post: post %>
+        <% end %>
+      <% else %>
+        <p class="cmt-empty">まだコメントがありません。最初の声を届けましょう。</p>
+      <% end %>
+    </div>
+  </section>
+<% end %>
