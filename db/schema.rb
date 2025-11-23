@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_05_120000) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_23_090000) do
   create_table "abstinence_sessions", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "started_at"
@@ -35,7 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_05_120000) do
     t.string "target_item", null: false
     t.integer "target_amount_jpy", null: false
     t.datetime "started_on", null: false
-    t.datetime "achieved_on", null: false
+    t.datetime "achieved_on"
     t.integer "status", default: 0, null: false, comment: "active=0,achieved=1"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

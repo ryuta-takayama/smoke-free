@@ -12,7 +12,6 @@ class GoalsController < ApplicationController
 
       @goal.assign_attributes(goal_params)
       @goal.status = :active
-      @goal.achieved_on = estimate_achieved_on(@goal.target_amount_jpy, @daily_saving_amount) || @goal.started_on
 
       if @goal.save
         redirect_to dashboards_path, notice: "目標を設定しました"
