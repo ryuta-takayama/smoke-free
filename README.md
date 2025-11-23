@@ -256,7 +256,7 @@ erDiagram
 
   USERS ||--|| SMOKING_SETTINGS : "has_one"
   USERS ||--o{ ABSTINENCE_SESSIONS : "has_many"
-  USERS ||--o{ GOALS : "has_many (active:1)"
+  USERS ||--|| GOALS : "has_one (active:1)"
   USERS ||--o{ RESTART_CHALLENGES : "has_many"
   USERS ||--o{ POSTS : "has_many"
   USERS ||--o{ COMMENTS : "has_many"
