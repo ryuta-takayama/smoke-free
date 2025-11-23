@@ -131,7 +131,7 @@ https://smoke-free.onrender.com
 | target_amount_jpy | integer | null: false |
 | started_on | date | null: false |
 | status | integer | null: false, default: 0, comment: "0=active,1=achieved" |
-| achieved_at | datetime | null: true |
+| achieved_on | datetime | null: true |
 
 **Associations**  
 - belongs_to :user  
