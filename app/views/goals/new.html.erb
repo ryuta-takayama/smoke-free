@@ -2,15 +2,18 @@
 
 <div class="goal-wrapper">
   <div class="goal-inner">
-    <div class="goal-topbar">
-      <%= link_to (request.referer || root_path), class: "goal-back" do %>
-        <span class="goal-back-icon">←</span>
-        <span>戻る</span>
-      <% end %>
-      <h1 class="goal-title">目標設定</h1>
-    </div>
+    <% back_path = request.referer.presence || dashboards_path %>
+    <%= render "shared/ap_topbar", icon_to: back_path, back_to: back_path, right: "目標設定" %>
 
-    <%= form_with model: @goal, url: goals_path, local: true, class: "goal-form" do |f| %>
+    <%= form_with model: @goal,
+                  url: goals_path,
+                  local: true,
+                  class: "goal-form",
+                  data: {
+                    controller: "goal-sim",
+                    "goal-sim-daily-saving-value": @daily_saving_amount || 0,
+                    "goal-sim-saved-money-value": @saved_money_jpy || 0
+                  } do |f| %>
       <div class="goal-grid">
         <div class="goal-card goal-card-form">
           <h2 class="goal-card-title">目標設定</h2>
@@ -23,13 +26,20 @@
               <%= f.label :target_amount_jpy, "目標金額", class: "goal-label" %>
               <div class="goal-input-prefix">
                 <span>¥</span>
-                <%= f.number_field :target_amount_jpy, min: 0, step: 100, placeholder: "0", class: "goal-input" %>
+                <%= f.number_field :target_amount_jpy,
+                                   min: 0,
+                                   step: 100,
+                                   placeholder: "0",
+                                   class: "goal-input",
+                                   data: { "goal-sim-target": "amount", action: "input->goal-sim#update change->goal-sim#update" } %>
                 <span class="goal-input-suffix">円</span>
               </div>
             </div>
             <div class="goal-field">
               <%= f.label :started_on, "目標開始日", class: "goal-label" %>
-              <%= f.date_field :started_on, class: "goal-input" %>
+              <%= f.date_field :started_on,
+                               class: "goal-input",
+                               data: { "goal-sim-target": "startDate", action: "input->goal-sim#update change->goal-sim#update" } %>
             </div>
           </div>
         </div>
@@ -58,14 +68,14 @@
             <dl class="goal-stats">
               <div class="goal-stat-row">
                 <dt>目標達成までの日数</dt>
-                <dd class="goal-stat-value">
-                  <%= defined?(@days_to_goal) && @days_to_goal.present? ? "#{@days_to_goal} 日" : "○○○ 日" %>
+                <dd class="goal-stat-value" data-goal-sim-target="days">
+                  <%= defined?(@days_to_goal) && @days_to_goal.present? ? "#{@days_to_goal} 日" : "— 日" %>
                 </dd>
               </div>
               <div class="goal-stat-row">
                 <dt>進捗率</dt>
-                <dd class="goal-stat-value">
-                  <%= defined?(@goal_progress_rate) && @goal_progress_rate.present? ? "#{@goal_progress_rate}%" : "○○○ %" %>
+                <dd class="goal-stat-value" data-goal-sim-target="progress">
+                  <%= defined?(@goal_progress_rate) && @goal_progress_rate.present? ? "#{@goal_progress_rate}%" : "— %" %>
                 </dd>
               </div>
             </dl>

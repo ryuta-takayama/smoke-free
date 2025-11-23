@@ -1,27 +1,35 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, only: [:new,:create]
-  before_action :set_calculator, only: [:new,:create]
-  before_action :assign_metrics, only:  [:new,:create]
+  before_action :set_goal, only: [:new, :create]
+  before_action :set_calculator, only: [:new, :create]
+  before_action :assign_metrics, only: [:new, :create]
 
   def new
   end
 
   def create
-    @goal.assign_attributes(goal_params)
-    @goal.achieved_on = estimate_achieved_on(@goal.target_amount_jpy, @daily_saving_amount) || @goal.started_on
+    Goal.transaction do
+      archive_active_goal!
 
-    if @goal.save
-      redirect_to dashboards_path, notice: "目標を設定しました"
-    else
-      render :new, status: :unprocessable_entity
+      @goal.assign_attributes(goal_params)
+      @goal.status = :active
+      @goal.achieved_on = estimate_achieved_on(@goal.target_amount_jpy, @daily_saving_amount) || @goal.started_on
+
+      if @goal.save
+        redirect_to dashboards_path, notice: "目標を設定しました"
+      else
+        raise ActiveRecord::Rollback
+      end
     end
+
+    render :new, status: :unprocessable_entity unless @goal.persisted?
   end
 
   private
 
   def set_goal
-    # Default to today so the date field is pre-filled
-    @goal = current_user.build_goal(started_on: Time.zone.today)
+    # Keep the current active goal to archive later, then build a fresh one for the form
+    @active_goal_before_new = current_user.goal
+    @goal = Goal.new(user: current_user, started_on: Time.zone.today)
   end
 
   def set_calculator
@@ -34,6 +42,7 @@ class GoalsController < ApplicationController
     @skipped_cigarettes_per_day = current_user.smoking_setting&.daily_cigarette_count
     @days_to_goal = days_to_goal(@goal.target_amount_jpy, @daily_saving_amount)
     @goal_progress_rate = progress_rate(@goal.target_amount_jpy)
+    @saved_money_jpy = @calc&.saved_money_jpy
   end
 
   def daily_saving_amount
@@ -65,6 +74,13 @@ class GoalsController < ApplicationController
 
     days = days_to_goal(target_amount, daily_amount)
     @goal.started_on + days.days if days
+  end
+
+  def archive_active_goal!
+    current = @active_goal_before_new
+    return unless current&.persisted?
+
+    current.update!(status: :achieved, achieved_on: current.achieved_on || Time.zone.now)
   end
 
   def goal_params

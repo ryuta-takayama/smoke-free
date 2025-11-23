@@ -100,28 +100,56 @@
         <header class="db-card-head">
           <h3 class="db-card-title">目標達成状況</h3>
         </header>
-        <div class="goal-row">
-          <div class="goal-labels">
-            <div class="goal-item">
-              <span class="label">目標</span>
-              <span class="value"><%= @goal_item || 'MacBook' %></span>
+        <% if @current_goal %>
+          <% progress_label = @goal_achieved ? "達成済み" : "#{(@goal_progress_rate || 0)}%" %>
+          <% bar_width = [@goal_progress_rate.to_f, 100].min rescue 0 %>
+          <div class="goal-row">
+            <div class="goal-labels">
+              <div class="goal-item">
+                <span class="label">目標</span>
+                <span class="value"><%= @goal_item %></span>
+              </div>
+              <div class="goal-item">
+                <span class="label">進捗</span>
+                <span class="value"><%= progress_label %></span>
+              </div>
             </div>
-            <div class="goal-item">
-              <span class="label">進捗</span>
-              <span class="value">100.0%</span>
+            <div class="goal-bar"><span class="bar-fill" style="width:<%= bar_width %>%"></span></div>
+            <div class="goal-stats">
+              <div class="stat">¥<%= number_with_delimiter(@goal_saved_jpy || 0) %><span> たまりました</span></div>
+              <div class="stat">
+                <% if @goal_achieved %>
+                  <span class="text-success">達成済み！</span>
+                <% else %>
+                  <%= (@days_left || 0) %>日<span> でゴール</span>
+                <% end %>
+              </div>
             </div>
           </div>
-          <div class="goal-bar"><span class="bar-fill" style="width:100%"></span></div>
-          <div class="goal-stats">
-            <div class="stat">¥<%= number_with_delimiter(@goal_saved_jpy || 0) %><span> 貯まった金額</span></div>
-            <div class="stat"><%= (@days_left || 0) %>日<span> 達成まで！</span></div>
+        <% else %>
+          <div class="goal-row">
+            <div class="goal-labels">
+              <div class="goal-item">
+                <span class="label">目標</span>
+                <span class="value">未設定</span>
+              </div>
+              <div class="goal-item">
+                <span class="label">進捗</span>
+                <span class="value">0%</span>
+              </div>
+            </div>
+            <div class="goal-bar"><span class="bar-fill" style="width:0%"></span></div>
+            <div class="goal-stats">
+              <div class="stat">¥0<span> たまりました</span></div>
+              <div class="stat">目標未設定</div>
+            </div>
           </div>
-        </div>
+        <% end %>
       </section>
 
       <section class="db-card">
         <header class="db-card-head">
-          <h3 class="db-card-title">健康改善の進捗</h3>
+          <h3 class="db-card-title">体への回復</h3>
         </header>
         <% elapsed_minutes = if @session_start.present?
              minutes = ((Time.current - @session_start) / 60).to_i
@@ -135,10 +163,7 @@
           <% end %>
         </ul>
       </section>
-    </div>
-  </section>
-
-  <!-- Panel: history/results -->
+    </div>  <!-- Panel: history/results -->
   <section class="db-panel is-hidden" data-dashboard-target="panel" data-panel="history">
     <div class="db-metrics">
       <div class="metric-card purple">
