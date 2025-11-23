@@ -1,0 +1,85 @@
+<% content_for :page_title, "アカウント設定|smoke free" %>
+
+<div class="settings-wrapper">
+  <%= render "shared/ap_topbar", icon_to: dashboards_path, back_to: dashboards_path, right: "マイページ" %>
+
+  <%= render "devise/shared/error_messages", resource: @user %>
+
+  <%= form_with model: @user, url: account_settings_path, method: :patch, local: true, data: { turbo: false }, class: "settings-form" do |f| %>
+    <div class="settings-grid">
+      <section class="settings-card">
+        <h2 class="card-title">プロフィールの変更設定</h2>
+        <div class="form-field">
+          <%= f.label :nickname, "ニックネーム", class: "form-label" %>
+          <%= f.text_field :nickname, class: "form-control" %>
+        </div>
+        <div class="form-field">
+          <%= f.label :email, "メールアドレス", class: "form-label" %>
+          <%= f.email_field :email, class: "form-control", autocomplete: "email" %>
+        </div>
+        <div class="form-field">
+          <%= f.label :password, "パスワード", class: "form-label" %>
+          <%= f.password_field :password, class: "form-control", autocomplete: "new-password", placeholder: "変更する場合のみ入力" %>
+        </div>
+        <div class="form-field">
+          <%= f.label :password_confirmation, "パスワード確認", class: "form-label" %>
+          <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
+        </div>
+        <div class="form-field">
+          <%= f.label :reason_to_quit, "禁煙理由", class: "form-label" %>
+          <%= f.select :reason_to_quit,
+                       options_for_select(reason_to_quit_options, f.object.reason_to_quit),
+                       { include_blank: "選択してください" },
+                       class: "form-control" %>
+        </div>
+      </section>
+
+      <div class="settings-side">
+        <section class="settings-card">
+          <h2 class="card-title">現在の連続禁煙記録</h2>
+          <dl class="metrics-list">
+            <div class="metric-row">
+              <dt>連続日数</dt>
+              <dd><%= (@calc&.current_streak_days || 0) %> 日</dd>
+            </div>
+            <div class="metric-row">
+              <dt>禁煙できた金額</dt>
+              <dd>¥<%= number_with_delimiter(@calc&.saved_money_jpy || 0) %></dd>
+            </div>
+            <div class="metric-row">
+              <dt>連続禁煙本数</dt>
+              <dd><%= number_with_delimiter(@calc&.avoided_cigarettes || 0) %> 本</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="settings-card">
+          <h2 class="card-title">禁煙の変更設定</h2>
+          <%= f.fields_for :smoking_setting do |s| %>
+            <%= s.hidden_field :id %>
+            <div class="form-field">
+              <%= s.label :quit_start_date, "禁煙開始日", class: "form-label" %>
+              <%= s.date_field :quit_start_date, value: s.object.quit_start_date || s.object.quit_start_datetime&.to_date, class: "form-control" %>
+            </div>
+            <div class="form-field">
+              <%= s.label :cigarette_price_jpy, "タバコ一箱の値段", class: "form-label" %>
+              <%= s.number_field :cigarette_price_jpy, min: 0, class: "form-control", placeholder: "例: 580" %>
+            </div>
+            <div class="form-field">
+              <%= s.label :daily_cigarette_count, "一日の禁煙本数", class: "form-label" %>
+              <%= s.number_field :daily_cigarette_count, min: 0, class: "form-control", placeholder: "例: 20" %>
+            </div>
+            <div class="form-field">
+              <%= s.label :cigarette_per_pack, "一箱あたりの本数", class: "form-label" %>
+              <%= s.number_field :cigarette_per_pack, min: 1, class: "form-control", placeholder: "例: 20" %>
+            </div>
+          <% end %>
+        </section>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "設定する", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

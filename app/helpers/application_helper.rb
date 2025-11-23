@@ -3,7 +3,7 @@ module ApplicationHelper
 	def streak_badges
 		{
 			3    => ['walking-time-svgrepo-com.svg',         '3日達成！'],
-			14   => ['run-person-fast-rush-svgrepo-com.svg', '1週間達成！　その調子で！'],
+			7   => ['run-person-fast-rush-svgrepo-com.svg', '1週間達成！　その調子で！'],
 			30   => ['flag-svgrepo-com.svg',                 '1か月達成！　いいね！'],
 			90   => ['flag-svgrepo-com.svg',                 '3か月達成！　だんだんと軽くなったんじゃない！？'],
 			180  => ['star-half-stroke-filled-svgrepo-com.svg','半年達成！　ほんとすごい！'],
@@ -39,4 +39,16 @@ module ApplicationHelper
 		ms = elapsed_minutes.to_i
 		health_improvement_milestones.select { |min, _| ms >= min }.values
 	end
+
+  # Options for User.reason_to_quit enum with Japanese labels
+  def reason_to_quit_options
+    labels = {
+      health: "健康のため",
+      money:  "節約のため",
+      family: "家族のため",
+      work:   "仕事・勉強",
+      other:  "その他"
+    }
+    User.reason_to_quits.keys.map { |key| [labels[key.to_sym] || key.humanize, key] }
+  end
 end

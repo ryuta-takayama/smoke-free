@@ -120,13 +120,10 @@
 
         <div class="form-field">
           <label class="form-label" for="user_reason_to_quit">禁煙の理由</label>
-          <%= f.select :reason_to_quit, [
-              ['健康のため', 'health'],
-              ['節約のため', 'money'],
-              ['家族のため', 'family'],
-              ['仕事・勉強', 'work'],
-              ['その他', 'other']
-            ], { include_blank: '選択してください' }, class: 'form-control' %>
+          <%= f.select :reason_to_quit,
+                       options_for_select(reason_to_quit_options, f.object.reason_to_quit),
+                       { include_blank: '選択してください' },
+                       class: 'form-control' %>
         </div>
 
         <div class="form-actions between">

@@ -8,7 +8,7 @@
        <%= link_to "smoke free", root_path, class: "brand-name" %>
     </div>
     <div class="actions-right">
-      <a href="#" class="action-link-1"> アカウント設定</a>
+      <%= link_to "アカウント設定", account_settings_path, class: "action-link-1" %>
       <%= link_to "ログアウト", destroy_user_session_path, data: {turbo_method: :delete} , class: "action-link-2" %>
     </div>
   </header>
@@ -163,7 +163,8 @@
           <% end %>
         </ul>
       </section>
-    </div>  <!-- Panel: history/results -->
+    </div>
+  </section>  <!-- Panel: history/results -->
   <section class="db-panel is-hidden" data-dashboard-target="panel" data-panel="history">
     <div class="db-metrics">
       <div class="metric-card purple">
